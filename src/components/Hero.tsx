@@ -107,14 +107,14 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="col-span-1 md:col-span-5 flex justify-center md:justify-end order-1 md:order-2"
         >
-          <div className="relative w-72 h-72 sm:w-[380px] sm:h-[380px] overflow-hidden group">
+          <div className="relative w-[240px] h-[240px] min-[360px]:w-72 min-[360px]:h-72 sm:w-[380px] sm:h-[380px] overflow-hidden group">
             <Image
               src="/images/profile.jpeg"
               alt="Hamenath B - Full Stack Developer & AI Builder"
               fill
               priority
               className="object-cover object-center transition-all duration-700 ease-out"
-              sizes="(max-width: 768px) 288px, 380px"
+              sizes="(max-width: 768px) 240px, 380px"
             />
           </div>
         </motion.div>
