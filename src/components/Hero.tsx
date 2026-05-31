@@ -91,8 +91,8 @@ export default function Hero() {
               Contact Me
             </button>
             <a
-              href="/resume.pdf"
-              download
+              href="/HamenathResumefinal.pdf"
+              download="Hamenath_B_Resume.pdf"
               className="px-6 py-3 bg-white text-neutral-800 text-sm font-semibold rounded-full border border-neutral-200 hover:bg-neutral-50 transition-all duration-200"
             >
               Download Resume
