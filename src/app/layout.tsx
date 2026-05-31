@@ -18,37 +18,33 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hamenath.dev'),
+  metadataBase: new URL('https://hamenath.online'),
   title: {
-    default: 'Hamenath B | Full Stack Developer',
+    default: 'Hamenath B | Full Stack Developer & AI Builder',
     template: '%s | Hamenath B',
   },
   description:
-    'Official portfolio of Hamenath B, Full Stack Developer, React Developer and Frontend Developer.',
+    'Hamenath B is a Full Stack Developer and AI Builder specializing in React, Next.js, Node.js, MongoDB and modern web applications.',
   keywords: [
     'Hamenath B',
     'Full Stack Developer',
-    'AI Builder',
-    'Next.js Developer',
     'React Developer',
-    'Portfolio',
-    'Smart India Hackathon 2025',
-    'VEXA TECH',
-    'Genz Studio',
+    'Next.js Developer',
+    'AI Builder',
+    'Web Developer',
   ],
-  authors: [{ name: 'Hamenath B', url: 'https://hamenath.dev' }],
+  authors: [{ name: 'Hamenath B', url: 'https://hamenath.online' }],
   creator: 'Hamenath B',
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://hamenath.dev',
-    title: 'Hamenath B — Full Stack Developer & AI Builder',
-    description:
-      'Full Stack Developer and AI Builder. Smart India Hackathon 2025 Winner. Building premium digital products at VEXA TECH and Genz Studio.',
+    url: 'https://hamenath.online',
+    title: 'Hamenath B | Full Stack Developer',
+    description: 'Official Portfolio of Hamenath B',
     siteName: 'Hamenath B Portfolio',
     images: [
       {
-        url: '/images/profile.jpeg',
+        url: 'https://hamenath.online/images/profile.jpg',
         width: 1200,
         height: 630,
         alt: 'Hamenath B - Full Stack Developer',
@@ -57,11 +53,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hamenath B — Full Stack Developer & AI Builder',
-    description:
-      'Full Stack Developer and AI Builder. Smart India Hackathon 2025 Winner.',
+    title: 'Hamenath B | Full Stack Developer',
+    description: 'Official Portfolio of Hamenath B',
     creator: '@hamenath',
-    images: ['/images/profile.jpeg'],
+    images: ['https://hamenath.online/images/profile.jpg'],
   },
   robots: {
     index: true,
@@ -81,9 +76,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    'name': 'Hamenath B',
+    'url': 'https://hamenath.online',
+    'jobTitle': 'Full Stack Developer',
+    'sameAs': [
+      'https://github.com/Hamenath',
+      'https://www.linkedin.com/in/hamenathbdesigner',
+      'https://x.com/HamenathOffi',
+      'https://www.instagram.com/editor_ak._?igsh=MXI0MmlhajI1YWRvNg=='
+    ],
+  };
+
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased bg-white text-neutral-900">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll>
           <Navbar />
           {children}

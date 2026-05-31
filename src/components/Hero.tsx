@@ -71,13 +71,15 @@ export default function Hero() {
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 leading-[1.1] font-heading">
-            Full Stack Developer <br />
-            <span className="text-neutral-500 font-medium">&amp; AI Builder</span>
+            Hamenath B
           </h1>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-500 font-heading">
+            Full Stack Developer &amp; AI Builder
+          </h2>
 
           {/* Intro Text */}
           <p className="text-base sm:text-lg text-neutral-600 max-w-xl leading-relaxed">
-            Hi, I&apos;m <span className="text-neutral-900 font-semibold">Hamenath B.</span>, a developer dedicated to crafting modern, premium web architectures and intelligent AI integrations. From concept to production, I build fluid digital products with a focus on speed, design, and usability.
+            Hi, I&apos;m a developer dedicated to crafting modern, premium web architectures and intelligent AI integrations. From concept to production, I build fluid digital products with a focus on speed, design, and usability.
           </p>
 
           {/* CTAs */}
@@ -108,7 +110,7 @@ export default function Hero() {
           <div className="relative w-72 h-72 sm:w-[380px] sm:h-[380px] overflow-hidden group">
             <Image
               src="/images/profile.jpeg"
-              alt="Hamenath B"
+              alt="Hamenath B - Full Stack Developer & AI Builder"
               fill
               priority
               className="object-cover object-center transition-all duration-700 ease-out"
