@@ -64,7 +64,7 @@ export default function Contact() {
           className="flex flex-col gap-4 mb-16 max-w-2xl"
         >
           <span className="text-xs uppercase font-bold tracking-widest text-neutral-400 font-heading">
-            06 / Contact
+            07 / Contact
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 font-heading">
             Let&apos;s build something together

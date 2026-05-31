@@ -82,6 +82,7 @@ export default function RootLayout({
     'name': 'Hamenath B',
     'url': 'https://hamenath.online',
     'jobTitle': 'Full Stack Developer',
+    'image': 'https://hamenath.online/images/profile.jpg',
     'sameAs': [
       'https://github.com/Hamenath',
       'https://www.linkedin.com/in/hamenathbdesigner',
