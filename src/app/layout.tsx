@@ -20,11 +20,11 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL('https://hamenath.dev'),
   title: {
-    default: 'Hamenath B — Full Stack Developer & AI Builder',
+    default: 'Hamenath B | Full Stack Developer',
     template: '%s | Hamenath B',
   },
   description:
-    'Hamenath B is a Full Stack Developer and AI Builder specializing in Next.js, React, Node.js, and modern web applications. Smart India Hackathon 2025 Winner. Founder of Genz Studio.',
+    'Official portfolio of Hamenath B, Full Stack Developer, React Developer and Frontend Developer.',
   keywords: [
     'Hamenath B',
     'Full Stack Developer',
