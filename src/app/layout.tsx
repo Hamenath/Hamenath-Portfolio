@@ -98,7 +98,8 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased bg-white text-neutral-900">
+      <body className="font-sans antialiased bg-[#020203] text-white">
+        <div className="noise-overlay" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

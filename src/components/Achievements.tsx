@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { HiCheckBadge, HiAcademicCap } from 'react-icons/hi2';
+import { HiCheckBadge } from 'react-icons/hi2';
 import { Awards } from '@/components/ui/award';
 
 const achievements = [
@@ -51,15 +51,6 @@ const achievements = [
     showAward: false,
   },
   {
-    category: 'Internship',
-    title: 'Full Stack Developer Intern',
-    subtitle: 'Lunewise Technologies',
-    description:
-      'Completed a hands-on internship focused on backend API development, frontend optimization, and real-world teamwork in agile sprint cycles.',
-    date: 'Jul – Oct 2024',
-    showAward: false,
-  },
-  {
     category: 'Certification',
     title: 'Google IT Support Professional',
     subtitle: 'Google (Coursera)',
@@ -86,88 +77,91 @@ const itemVariants = {
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="section-padding bg-neutral-50/50 border-t border-neutral-100">
+    <section id="achievements" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+      {/* Background glow offsets */}
+      <div className="absolute top-[20%] left-[-10%] w-[35%] h-[35%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto px-6">
+        <div className="apple-section-glass p-8 sm:p-12 md:p-16">
+          {/* Header */}
+          <div className="flex flex-col gap-4 mb-12 md:mb-16">
+            <span className="text-xs uppercase font-bold tracking-widest text-blue-400 font-heading">
+              07 / Achievements
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading">
+              Recognition &amp; Certifications
+            </h2>
+          </div>
 
-        {/* Header */}
-        <div className="flex flex-col gap-4 mb-12 md:mb-16">
-          <span className="text-xs uppercase font-bold tracking-widest text-neutral-400 font-heading">
-            05 / Achievements
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 font-heading">
-            Recognition &amp; Certifications
-          </h2>
-        </div>
+          {/* Achievements Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {achievements.map((item, idx) => {
+              if (item.showAward) {
+                return (
+                  <motion.div
+                    key={idx}
+                    variants={itemVariants}
+                    className="group relative flex items-center justify-center rounded-3xl apple-crystal min-h-[280px] overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(234,179,8,0.02)]"
+                  >
+                    <Awards
+                      variant="award"
+                      title={item.title || ''}
+                      subtitle={item.subtitle}
+                      recipient={item.recipient}
+                      date={item.date}
+                      level={item.level}
+                      className="w-full h-full text-white bg-transparent"
+                    />
+                  </motion.div>
+                );
+              }
 
-        {/* Achievements Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {achievements.map((item, idx) => {
-            if (item.showAward) {
               return (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="group relative flex items-center justify-center rounded-3xl border bg-white border-neutral-100 hover:border-neutral-200 hover:shadow-lg transition-all duration-300 min-h-[280px] overflow-hidden"
+                  className="group relative flex flex-col gap-4 p-6 rounded-3xl apple-crystal"
                 >
-                  <Awards
-                    variant="award"
-                    title={item.title || ''}
-                    subtitle={item.subtitle}
-                    recipient={item.recipient}
-                    date={item.date}
-                    level={item.level}
-                    className="w-full h-full text-neutral-900"
-                  />
+                  {/* Category tag + Icon */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase font-bold tracking-widest font-heading text-slate-500">
+                      {item.category}
+                    </span>
+                    <div className="p-2 rounded-xl apple-badge-crystal text-slate-400 group-hover:text-blue-400 transition-all">
+                      <HiCheckBadge size={18} />
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-lg font-bold font-heading tracking-tight leading-snug text-white group-hover:text-blue-400 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-slate-450">
+                      {item.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm leading-relaxed flex-1 text-slate-400">
+                    {item.description}
+                  </p>
+
+                  {/* Date */}
+                  <span className="text-xs font-semibold font-heading text-slate-500">
+                    {item.date}
+                  </span>
                 </motion.div>
               );
-            }
-
-            return (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="group relative flex flex-col gap-4 p-6 rounded-3xl border bg-white border-neutral-100 hover:border-neutral-200 hover:shadow-xs transition-all duration-300"
-              >
-                {/* Category tag + Icon */}
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] uppercase font-bold tracking-widest font-heading text-neutral-400">
-                    {item.category}
-                  </span>
-                  <div className="p-2 rounded-xl bg-neutral-50 text-neutral-600 group-hover:text-neutral-900 transition-colors">
-                    <HiCheckBadge size={18} />
-                  </div>
-                </div>
-
-                {/* Title */}
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-lg font-bold font-heading tracking-tight leading-snug text-neutral-900">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs font-semibold text-neutral-500">
-                    {item.subtitle}
-                  </p>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm leading-relaxed flex-1 text-neutral-500">
-                  {item.description}
-                </p>
-
-                {/* Date */}
-                <span className="text-xs font-semibold font-heading text-neutral-400">
-                  {item.date}
-                </span>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
