@@ -73,58 +73,60 @@ export default function Blog() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   return (
-    <section id="blog" className="section-padding bg-neutral-50/50 border-t border-neutral-100 relative">
+    <section id="blog" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+      {/* Background glow offsets */}
+      <div className="absolute top-[20%] left-[-10%] w-[35%] h-[35%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto px-6">
-        
-        {/* Header */}
-        <div className="flex flex-col gap-4 mb-12 md:mb-16">
-          <span className="text-xs uppercase font-bold tracking-widest text-neutral-400 font-heading">
-            06 / Blog &amp; Insights
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 font-heading">
-            Thoughts on Code, Design &amp; AI
-          </h2>
-          <p className="text-neutral-500 text-sm max-w-lg mt-1">
-            Sharing lessons learned from hackathons, building premium user experiences, and integrating intelligent AI architectures.
-          </p>
-        </div>
+        <div className="apple-section-glass p-8 sm:p-12 md:p-16">
+          {/* Header */}
+          <div className="flex flex-col gap-4 mb-12 md:mb-16">
+            <span className="text-xs uppercase font-bold tracking-widest text-blue-400 font-heading">
+              08 / Blog &amp; Insights
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading">
+              Thoughts on Code, Design &amp; AI
+            </h2>
+            <p className="text-slate-400 text-sm max-w-lg mt-1">
+              Sharing lessons learned from hackathons, building premium user experiences, and integrating intelligent AI architectures.
+            </p>
+          </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {articles.map((article) => (
-            <motion.div
-              key={article.slug}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-between p-6 sm:p-8 rounded-3xl border bg-white border-neutral-100 hover:border-neutral-200 hover:shadow-xs transition-all duration-300 cursor-pointer group"
-              onClick={() => setSelectedArticle(article)}
-            >
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-[10px] uppercase font-bold tracking-widest font-heading text-neutral-400 px-2.5 py-1 bg-neutral-50 rounded-md border border-neutral-100/50">
-                    {article.category}
-                  </span>
-                  <div className="flex items-center gap-1.5 text-xs text-neutral-400">
-                    <HiOutlineCalendar size={13} />
-                    <span>{article.date}</span>
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {articles.map((article) => (
+              <motion.div
+                key={article.slug}
+                className="flex flex-col justify-between p-6 sm:p-8 rounded-3xl apple-crystal cursor-pointer group"
+                onClick={() => setSelectedArticle(article)}
+              >
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] uppercase font-bold tracking-widest font-heading text-slate-300 px-2.5 py-1 apple-badge-crystal">
+                      {article.category}
+                    </span>
+                    <div className="flex items-center gap-1.5 text-xs text-slate-450">
+                      <HiOutlineCalendar size={13} className="text-slate-500" />
+                      <span>{article.date}</span>
+                    </div>
                   </div>
+                  
+                  <h3 className="text-lg sm:text-xl font-bold font-heading text-white leading-snug group-hover:text-blue-400 transition-colors">
+                    {article.title}
+                  </h3>
+                  
+                  <p className="text-sm leading-relaxed text-slate-400 line-clamp-3">
+                    {article.excerpt}
+                  </p>
                 </div>
-                
-                <h3 className="text-lg sm:text-xl font-bold font-heading text-neutral-900 leading-snug group-hover:text-neutral-950 transition-colors">
-                  {article.title}
-                </h3>
-                
-                <p className="text-sm leading-relaxed text-neutral-500 line-clamp-3">
-                  {article.excerpt}
-                </p>
-              </div>
 
-              <div className="flex items-center gap-2 text-xs font-semibold text-neutral-900 font-heading mt-6 pt-4 border-t border-neutral-50 group-hover:translate-x-1.5 transition-transform duration-300 w-fit">
-                <span>Read Article</span>
-                <HiOutlineArrowRight size={13} />
-              </div>
-            </motion.div>
-          ))}
+                <div className="flex items-center gap-2 text-xs font-semibold text-white font-heading mt-6 pt-4 border-t border-white/5 group-hover:translate-x-1.5 transition-transform duration-300 w-fit">
+                  <span>Read Article</span>
+                  <HiOutlineArrowRight size={13} className="text-blue-400" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -135,7 +137,7 @@ export default function Blog() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/40 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
             onClick={() => setSelectedArticle(null)}
           >
             <motion.div
@@ -143,32 +145,32 @@ export default function Blog() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 20, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className="w-full max-w-3xl max-h-[85vh] bg-white rounded-3xl border border-neutral-200 shadow-2xl flex flex-col overflow-hidden"
+              className="w-full max-w-3xl max-h-[85vh] bg-[#020203]/90 rounded-3xl border border-white/12 shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="flex items-start justify-between p-6 sm:p-8 border-b border-neutral-100 bg-white">
+              <div className="flex items-start justify-between p-6 sm:p-8 border-b border-white/5 bg-white/3">
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="text-[10px] uppercase font-bold tracking-widest font-heading text-neutral-500 px-2.5 py-1 bg-neutral-50 rounded-md border border-neutral-150">
+                    <span className="text-[10px] uppercase font-bold tracking-widest font-heading text-slate-350 px-2.5 py-1 bg-white/5 rounded-md border border-white/10">
                       {selectedArticle.category}
                     </span>
-                    <div className="flex items-center gap-1.5 text-xs text-neutral-400">
+                    <div className="flex items-center gap-1.5 text-xs text-slate-400">
                       <HiOutlineCalendar size={13} />
                       <span>{selectedArticle.date}</span>
                     </div>
-                    <div className="flex items-center gap-1.5 text-xs text-neutral-400">
+                    <div className="flex items-center gap-1.5 text-xs text-slate-400">
                       <HiOutlineClock size={13} />
                       <span>{selectedArticle.readTime}</span>
                     </div>
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-bold font-heading text-neutral-900 leading-snug">
+                  <h2 className="text-xl sm:text-2xl font-bold font-heading text-white leading-snug">
                     {selectedArticle.title}
                   </h2>
                 </div>
                 <button
                   onClick={() => setSelectedArticle(null)}
-                  className="p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400 hover:text-neutral-900 transition-colors"
+                  className="p-1.5 rounded-full hover:bg-white/5 text-slate-400 hover:text-white transition-colors border border-white/5"
                   aria-label="Close modal"
                 >
                   <HiOutlineX size={20} />
@@ -176,19 +178,19 @@ export default function Blog() {
               </div>
 
               {/* Modal Content */}
-              <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-white">
+              <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 bg-transparent">
                 {selectedArticle.content.map((paragraph, idx) => (
-                  <p key={idx} className="text-neutral-600 text-sm sm:text-base leading-relaxed">
+                  <p key={idx} className="text-slate-300 text-sm sm:text-base leading-relaxed">
                     {paragraph}
                   </p>
                 ))}
               </div>
 
               {/* Modal Footer */}
-              <div className="flex justify-end p-6 border-t border-neutral-100 bg-neutral-50/50">
+              <div className="flex justify-end p-6 border-t border-white/5 bg-white/3">
                 <button
                   onClick={() => setSelectedArticle(null)}
-                  className="px-5 py-2 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold rounded-full transition-colors"
+                  className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-full transition-colors shadow-lg"
                 >
                   Close
                 </button>

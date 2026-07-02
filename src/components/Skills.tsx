@@ -1,35 +1,68 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaReact, FaNodeJs } from 'react-icons/fa';
-import { FiVideo, FiImage, FiPenTool, FiSliders } from 'react-icons/fi';
+import { 
+  FaReact, 
+  FaNodeJs, 
+  FaGitAlt, 
+  FaGithub, 
+  FaDocker, 
+  FaFigma,
+  FaCode
+} from 'react-icons/fa';
 import { 
   SiNextdotjs, 
   SiExpress, 
   SiMongodb, 
   SiFirebase, 
   SiTailwindcss, 
+  SiTypescript,
   SiOpenai,
+  SiCloudinary
 } from 'react-icons/si';
+import { TbSettingsCog, TbApi } from 'react-icons/tb';
+import { FaBrain } from 'react-icons/fa';
 
-const devSkills = [
-  { name: 'React.js', icon: FaReact },
-  { name: 'Next.js', icon: SiNextdotjs },
-  { name: 'Tailwind CSS', icon: SiTailwindcss },
-  { name: 'Node.js', icon: FaNodeJs },
-  { name: 'Express.js', icon: SiExpress },
-  { name: 'MongoDB', icon: SiMongodb },
-  { name: 'Firebase', icon: SiFirebase },
-  { name: 'AI Integration', icon: SiOpenai },
-];
-
-const designSkills = [
-  { name: 'Photoshop', icon: FiImage },
-  { name: 'Illustrator', icon: FiPenTool },
-  { name: 'Premiere Pro', icon: FiVideo },
-  { name: 'After Effects', icon: FiVideo },
-  { name: 'Lightroom', icon: FiSliders },
-  { name: 'CapCut', icon: FiVideo },
+const skillCategories = [
+  {
+    title: 'Frontend',
+    skills: [
+      { name: 'React', icon: FaReact, color: 'text-blue-400' },
+      { name: 'Next.js', icon: SiNextdotjs, color: 'text-white' },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'text-cyan-400' },
+      { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-500' },
+    ],
+  },
+  {
+    title: 'Backend',
+    skills: [
+      { name: 'Node.js', icon: FaNodeJs, color: 'text-green-500' },
+      { name: 'Express', icon: SiExpress, color: 'text-slate-300' },
+      { name: 'Firebase', icon: SiFirebase, color: 'text-yellow-500' },
+      { name: 'MongoDB', icon: SiMongodb, color: 'text-green-400' },
+      { name: 'REST APIs', icon: TbApi, color: 'text-purple-400' },
+    ],
+  },
+  {
+    title: 'AI & Automation',
+    skills: [
+      { name: 'OpenAI', icon: SiOpenai, color: 'text-green-300' },
+      { name: 'Gemini', icon: FaBrain, color: 'text-blue-400' },
+      { name: 'Prompt Eng.', icon: TbSettingsCog, color: 'text-pink-400' },
+      { name: 'Automation', icon: TbSettingsCog, color: 'text-orange-400' },
+    ],
+  },
+  {
+    title: 'Tools & Platforms',
+    skills: [
+      { name: 'Git', icon: FaGitAlt, color: 'text-orange-500' },
+      { name: 'GitHub', icon: FaGithub, color: 'text-white' },
+      { name: 'Docker', icon: FaDocker, color: 'text-blue-400' },
+      { name: 'Figma', icon: FaFigma, color: 'text-pink-500' },
+      { name: 'Cloudinary', icon: SiCloudinary, color: 'text-blue-500' },
+      { name: 'VS Code', icon: FaCode, color: 'text-blue-400' },
+    ],
+  },
 ];
 
 const containerVariants = {
@@ -41,13 +74,13 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    scale: 1,
+    y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.5,
       ease: [0.16, 1, 0.3, 1],
     },
   },
@@ -55,83 +88,60 @@ const itemVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-padding bg-neutral-50/50 border-t border-neutral-100">
+    <section id="skills" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+      {/* Background glow offsets */}
+      <div className="absolute top-[20%] left-[-10%] w-[30%] h-[40%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto px-6">
-        
-        {/* Header */}
-        <div className="flex flex-col gap-4 mb-12 md:mb-16">
-          <span className="text-xs uppercase font-bold tracking-widest text-neutral-400 font-heading">
-            03 / Skills
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 font-heading">
-            My technology suite
-          </h2>
-        </div>
+        <div className="apple-section-glass p-8 sm:p-12 md:p-16">
+          {/* Header */}
+          <div className="flex flex-col gap-4 mb-12 md:mb-16">
+            <span className="text-xs uppercase font-bold tracking-widest text-blue-400 font-heading">
+              03 / Skills
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading">
+              My technology stack
+            </h2>
+          </div>
 
-        {/* Development Suite */}
-        <div className="mb-12">
-          <h3 className="text-sm uppercase font-bold tracking-wider text-neutral-400 font-heading mb-6">
-            Development Suite
-          </h3>
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
-          >
-            {devSkills.map((skill, idx) => {
-              const Icon = skill.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  className="flex items-center gap-4 p-4 rounded-2xl border border-neutral-100 bg-white hover:border-neutral-200/80 hover:shadow-2xs transition-all duration-300 group select-none"
+          {/* Categories Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {skillCategories.map((category, catIdx) => (
+              <div key={catIdx} className="p-6 md:p-8 rounded-3xl apple-crystal flex flex-col gap-6">
+                <h3 className="text-lg font-bold text-white tracking-tight font-heading border-b border-white/5 pb-3">
+                  {category.title}
+                </h3>
+                
+                <motion.div 
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-4"
                 >
-                  <div className="p-2 rounded-xl bg-neutral-50 text-neutral-600 group-hover:text-neutral-950 group-hover:bg-neutral-100 transition-colors">
-                    <Icon size={20} />
-                  </div>
-                  <span className="font-heading font-semibold text-sm text-neutral-700 group-hover:text-neutral-950 transition-colors">
-                    {skill.name}
-                  </span>
+                  {category.skills.map((skill, idx) => {
+                    const Icon = skill.icon;
+                    return (
+                      <motion.div
+                        key={idx}
+                        variants={cardVariants}
+                        whileHover={{ y: -3, scale: 1.02 }}
+                        className="relative flex flex-col items-center justify-center p-4 rounded-full apple-badge-crystal border border-white/5 hover:border-blue-500/40 transition-all duration-300 group select-none cursor-pointer"
+                      >
+                        <div className="p-2 rounded-full text-slate-300 group-hover:text-white transition-all duration-300">
+                          <Icon size={20} />
+                        </div>
+                        <span className="font-heading font-semibold text-[10px] text-slate-400 group-hover:text-white mt-1.5 transition-colors">
+                          {skill.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
                 </motion.div>
-              );
-            })}
-          </motion.div>
+              </div>
+            ))}
+          </div>
         </div>
-
-        {/* Design & Editing Suite */}
-        <div>
-          <h3 className="text-sm uppercase font-bold tracking-wider text-neutral-400 font-heading mb-6">
-            Design &amp; Editing Suite
-          </h3>
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
-          >
-            {designSkills.map((skill, idx) => {
-              const Icon = skill.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  className="flex items-center gap-4 p-4 rounded-2xl border border-neutral-100 bg-white hover:border-neutral-200/80 hover:shadow-2xs transition-all duration-300 group select-none"
-                >
-                  <div className="p-2 rounded-xl bg-neutral-50 text-neutral-600 group-hover:text-neutral-950 group-hover:bg-neutral-100 transition-colors">
-                    <Icon size={20} />
-                  </div>
-                  <span className="font-heading font-semibold text-sm text-neutral-700 group-hover:text-neutral-950 transition-colors">
-                    {skill.name}
-                  </span>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-
       </div>
     </section>
   );

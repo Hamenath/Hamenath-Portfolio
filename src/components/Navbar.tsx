@@ -7,6 +7,7 @@ import { HiMenu, HiX } from 'react-icons/hi';
 const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -49,18 +50,18 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[92%] max-w-5xl rounded-full border border-white/8 bg-white/3 backdrop-blur-xl ${
           scrolled
-            ? 'py-4 bg-white/75 backdrop-blur-md'
-            : 'py-6 bg-transparent'
+            ? 'py-3 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8),0_0_45px_rgba(59,130,246,0.08)] border-white/12'
+            : 'py-4'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <div className="px-6 sm:px-8 flex items-center justify-between">
           {/* Logo */}
           <a
             href="#home"
             onClick={(e) => handleClick(e, '#home')}
-            className="text-lg font-bold tracking-tight text-neutral-900 font-heading hover:opacity-75 transition-opacity"
+            className="text-lg font-bold tracking-tight text-white font-heading hover:opacity-75 transition-opacity"
           >
             Hamenath B.
           </a>
@@ -72,24 +73,26 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleClick(e, link.href)}
-                className="text-sm font-medium text-neutral-600 hover:text-neutral-950 transition-colors duration-200 relative py-1"
+                className="text-sm font-medium text-slate-400 hover:text-white transition-colors duration-200 relative py-1 group"
               >
                 {link.name}
+                {/* Underline link active glow indicator */}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(228,24,79,0.8)]" />
               </a>
             ))}
             <a
               href="#contact"
               onClick={(e) => handleClick(e, '#contact')}
-              className="text-xs font-semibold px-4 py-2 bg-neutral-950 text-white rounded-full hover:bg-neutral-800 transition-colors"
+              className="text-xs font-semibold px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-full transition-all duration-300 border border-white/10 hover:border-blue-500/50 shadow-[0_0_20px_rgba(255,255,255,0.02)] hover:shadow-[0_0_25px_rgba(228,24,79,0.2)]"
             >
-              Get in touch
+              Hire Me
             </a>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-1.5 text-neutral-800 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-colors"
+            className="md:hidden p-1.5 text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-colors border border-white/5"
             aria-label="Toggle menu"
           >
             {isOpen ? <HiX size={20} /> : <HiMenu size={20} />}
@@ -105,7 +108,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[60px] z-40 bg-white/95 backdrop-blur-lg md:hidden flex flex-col px-6 py-8 border-t border-gray-100"
+            className="fixed inset-x-6 top-[80px] z-40 bg-black/90 border border-white/8 backdrop-blur-xl rounded-3xl flex flex-col p-6 shadow-2xl md:hidden"
           >
             <nav className="flex flex-col space-y-6">
               {navLinks.map((link) => (
@@ -113,7 +116,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleClick(e, link.href)}
-                  className="text-xl font-medium text-neutral-800 hover:text-neutral-950 transition-colors"
+                  className="text-lg font-medium text-slate-300 hover:text-white transition-colors"
                 >
                   {link.name}
                 </a>
@@ -121,9 +124,9 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={(e) => handleClick(e, '#contact')}
-                className="inline-block text-center text-sm font-semibold px-6 py-3 bg-neutral-950 text-white rounded-full hover:bg-neutral-800 transition-colors"
+                className="inline-block text-center text-sm font-semibold px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-colors shadow-[0_0_15px_rgba(228,24,79,0.3)]"
               >
-                Get in touch
+                Hire Me
               </a>
             </nav>
           </motion.div>

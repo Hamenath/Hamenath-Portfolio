@@ -1,33 +1,12 @@
 'use client';
 
-import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { HiArrowDown } from 'react-icons/hi';
+import AnimatedGradient from './ui/animated-gradient';
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  // Parallax scroll effect
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 80]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  const yTranslate = isMobile ? 0 : y;
-
-  const scrollToContact = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const element = document.getElementById('contact');
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
       const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
@@ -45,89 +24,108 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      ref={containerRef}
-      className="min-h-screen relative flex items-center justify-center bg-white pt-24 pb-12 overflow-hidden"
+      className="min-h-screen relative flex items-center justify-center bg-[#020203] overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-center pt-8 pb-20 md:py-20">
+      {/* Background Animated Grid overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 pointer-events-none z-10" />
+
+      {/* Animated Gradient Background Component */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-90 z-0">
+        <AnimatedGradient
+          config={{
+            preset: "custom",
+            color1: "#020203",
+            color2: "#e4184f",
+            color3: "#020203",
+            rotation: -50,
+            proportion: 30,
+            scale: 0.3,
+            speed: 15,
+            distortion: 6,
+            swirl: 50,
+            swirlIterations: 8,
+            softness: 85,
+          }}
+        />
+      </div>
+
+      {/* Main Content (Clean, calm, premium layout - perfectly centered) */}
+      <div className="max-w-4xl mx-auto px-6 w-full flex flex-col items-center justify-center text-center gap-6 z-10">
         
-        {/* Hero Left Content */}
-        <motion.div 
-          style={{ y: yTranslate }}
-          initial={{ opacity: 0, y: 30 }}
+        {/* Announcement Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="col-span-1 md:col-span-7 flex flex-col items-start gap-6 text-left order-2 md:order-1"
+          className="px-4 py-1.5 rounded-full apple-badge-crystal text-xs font-semibold text-slate-300 border border-white/8 bg-white/3 select-none"
         >
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-50 border border-neutral-100/80 shadow-2xs">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neutral-900 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-neutral-950"></span>
-            </span>
-            <span className="text-xs font-semibold text-neutral-800 tracking-wide font-heading">
-              Available for full stack & AI roles
-            </span>
-          </div>
-
-          {/* Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 leading-[1.1] font-heading">
-            Hamenath B
-          </h1>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-500 font-heading">
-            Full Stack Developer &amp; AI Builder
-          </h2>
-
-          {/* Intro Text */}
-          <p className="text-base sm:text-lg text-neutral-600 max-w-xl leading-relaxed">
-            Hi, I&apos;m a developer dedicated to crafting modern, premium web architectures and intelligent AI integrations. From concept to production, I build fluid digital products with a focus on speed, design, and usability.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-4 mt-2">
-            <button
-              onClick={scrollToContact}
-              className="px-6 py-3 bg-neutral-950 text-white text-sm font-semibold rounded-full hover:bg-neutral-800 transition-all duration-200 shadow-sm hover:shadow"
-            >
-              Contact Me
-            </button>
-            <a
-              href="/HamenathResumefinal.pdf"
-              download="Hamenath_B_Resume.pdf"
-              className="px-6 py-3 bg-white text-neutral-800 text-sm font-semibold rounded-full border border-neutral-200 hover:bg-neutral-50 transition-all duration-200"
-            >
-              Download Resume
-            </a>
-          </div>
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse" />
+          Available for full stack & AI roles
         </motion.div>
 
-        {/* Hero Right: Profile Image */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="col-span-1 md:col-span-5 flex justify-center md:justify-end order-1 md:order-2"
+        {/* Headline with Gothic Font Class */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="text-6xl sm:text-7xl lg:text-9xl font-extrabold tracking-tight text-white leading-[1.05] font-heading mt-2"
         >
-          <div className="relative w-[240px] h-[240px] min-[360px]:w-72 min-[360px]:h-72 sm:w-[380px] sm:h-[380px] overflow-hidden group">
-            <Image
-              src="/images/profile.jpeg"
-              alt="Hamenath B - Full Stack Developer & AI Builder"
-              fill
-              priority
-              className="object-cover object-center transition-all duration-700 ease-out"
-              sizes="(max-width: 768px) 240px, 380px"
-            />
-          </div>
+          <span className="block montenegrin-gothic-one-regular text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-400">
+            Hamenath B
+          </span>
+        </motion.h1>
+
+        {/* Subheading */}
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-blue-400 font-heading"
+        >
+          Full Stack Developer & AI Builder
+        </motion.h2>
+
+        {/* Short bio/description text */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+          className="max-w-2xl text-sm sm:text-base text-slate-400 leading-relaxed font-heading mt-2"
+        >
+          Hi, I&apos;m a developer dedicated to crafting modern, premium web architectures and intelligent AI integrations. From concept to production, I build fluid digital products with a focus on speed, design, and usability.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-4 mt-6"
+        >
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="px-8 py-3.5 apple-btn-crystal text-white text-sm font-semibold rounded-full shadow-[0_0_20px_rgba(228,24,79,0.35)] hover:shadow-[0_0_30px_rgba(228,24,79,0.55)]"
+          >
+            Contact Me
+          </button>
+          <a
+            href="/HamenathResumefinal.pdf"
+            download="Hamenath_B_Resume.pdf"
+            className="px-8 py-3.5 bg-white/5 text-white text-sm font-semibold rounded-full border border-white/10 hover:bg-white/10 transition-all duration-355 transform hover:-translate-y-0.5 hover:scale-[1.02] shadow-[0_0_20px_rgba(0,0,0,0.2)]"
+          >
+            Download Resume
+          </a>
         </motion.div>
       </div>
 
-      {/* Animated Scroll Down Indicator */}
+      {/* Scroll Down Indicator */}
       <motion.div 
-        style={{ opacity }}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-neutral-400 hover:text-neutral-900 transition-colors pointer-events-none"
+        onClick={() => scrollToSection('about')}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors cursor-pointer z-10"
       >
-        <span className="text-[10px] uppercase font-bold tracking-widest font-heading">Scroll</span>
+        <span className="text-[10px] uppercase font-bold tracking-widest font-heading">Scroll Down</span>
         <HiArrowDown size={14} />
       </motion.div>
     </section>
