@@ -98,7 +98,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased bg-[#020203] text-white">
+      <body className="font-sans antialiased bg-background text-white">
         <div className="noise-overlay" />
         <script
           type="application/ld+json"

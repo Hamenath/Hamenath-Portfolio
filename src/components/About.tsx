@@ -97,7 +97,7 @@ const timelineEvents = [
 
 export default function About() {
   return (
-    <section id="about" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="about" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute top-[20%] left-[-10%] w-[30%] h-[40%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[30%] h-[40%] rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
@@ -114,7 +114,7 @@ export default function About() {
               
               {/* Liquid Crystal Glass Image Frame */}
               <div className="relative w-full aspect-square rounded-3xl p-1 bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl group overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-white/10 opacity-60 z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-tr from-blue-500/10 via-transparent to-white/10 opacity-60 z-10 pointer-events-none" />
                 <div className="relative w-full h-full rounded-2xl overflow-hidden">
                   <Image
                     src="/images/profile.jpeg"
@@ -157,7 +157,7 @@ export default function About() {
                     className="relative group p-5 rounded-2xl apple-crystal"
                   >
                     {/* Timeline Glass Node */}
-                    <div className="absolute left-[-45px] top-5 w-8 h-8 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center transition-colors group-hover:border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                    <div className="absolute -left-11.25 top-5 w-8 h-8 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center transition-colors group-hover:border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
                       <div className={`w-2.5 h-2.5 rounded-full ${index === 0 ? 'bg-blue-500 animate-pulse' : 'bg-slate-600 group-hover:bg-blue-400'}`} />
                     </div>
 
