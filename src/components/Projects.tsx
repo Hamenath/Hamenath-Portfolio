@@ -166,7 +166,7 @@ export default function Projects() {
               {/* Right/Bottom Image Showcase */}
               <div className="lg:col-span-6 relative aspect-video lg:aspect-auto w-full h-full min-h-62.5 lg:min-h-95 bg-black/40 rounded-2xl overflow-hidden border border-white/5 group shadow-2xl">
                 <Image
-                  src="/images/lanzy.png"
+                  src="/images/project-lanzy.png"
                   alt="Lanzy Platform"
                   fill
                   className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700 ease-out"
