@@ -73,7 +73,7 @@ export default function Blog() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   return (
-    <section id="blog" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="blog" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute top-[20%] left-[-10%] w-[35%] h-[35%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
 
@@ -120,9 +120,9 @@ export default function Blog() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs font-semibold text-white font-heading mt-6 pt-4 border-t border-white/5 group-hover:translate-x-1.5 transition-transform duration-300 w-fit">
+                <div className="portfolio-pill-btn px-4 py-2 text-xs flex items-center gap-1.5 mt-6 w-fit">
                   <span>Read Article</span>
-                  <HiOutlineArrowRight size={13} className="text-blue-400" />
+                  <HiOutlineArrowRight size={13} className="text-white" />
                 </div>
               </motion.div>
             ))}
@@ -145,7 +145,7 @@ export default function Blog() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 20, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className="w-full max-w-3xl max-h-[85vh] bg-[#020203]/90 rounded-3xl border border-white/12 shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl"
+              className="w-full max-w-3xl max-h-[85vh] bg-background/90 rounded-3xl border border-white/12 shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
@@ -170,7 +170,7 @@ export default function Blog() {
                 </div>
                 <button
                   onClick={() => setSelectedArticle(null)}
-                  className="p-1.5 rounded-full hover:bg-white/5 text-slate-400 hover:text-white transition-colors border border-white/5"
+                  className="portfolio-pill-btn p-2 text-slate-300 hover:text-white"
                   aria-label="Close modal"
                 >
                   <HiOutlineX size={20} />
@@ -190,7 +190,7 @@ export default function Blog() {
               <div className="flex justify-end p-6 border-t border-white/5 bg-white/3">
                 <button
                   onClick={() => setSelectedArticle(null)}
-                  className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-full transition-colors shadow-lg"
+                  className="portfolio-pill-btn px-6 py-2.5 text-xs"
                 >
                   Close
                 </button>

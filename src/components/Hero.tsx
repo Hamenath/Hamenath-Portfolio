@@ -24,10 +24,10 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="min-h-screen relative flex items-center justify-center bg-[#020203] overflow-hidden"
+      className="min-h-screen relative flex items-center justify-center bg-background overflow-hidden"
     >
       {/* Background Animated Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[5rem_5rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 pointer-events-none z-10" />
 
       {/* Animated Gradient Background Component */}
       <div className="absolute inset-0 w-full h-full pointer-events-none opacity-90 z-0">
@@ -70,7 +70,7 @@ export default function Hero() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="text-6xl sm:text-7xl lg:text-9xl font-extrabold tracking-tight text-white leading-[1.05] font-heading mt-2"
         >
-          <span className="block montenegrin-gothic-one-regular text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-400">
+          <span className="block montenegrin-gothic-one-regular text-transparent bg-clip-text bg-linear-to-b from-white via-slate-100 to-slate-400">
             Hamenath B
           </span>
         </motion.h1>
@@ -104,14 +104,14 @@ export default function Hero() {
         >
           <button
             onClick={() => scrollToSection('contact')}
-            className="px-8 py-3.5 apple-btn-crystal text-white text-sm font-semibold rounded-full shadow-[0_0_20px_rgba(228,24,79,0.35)] hover:shadow-[0_0_30px_rgba(228,24,79,0.55)]"
+            className="portfolio-pill-btn px-8 py-3.5 text-sm"
           >
             Contact Me
           </button>
           <a
             href="/HamenathResumefinal.pdf"
             download="Hamenath_B_Resume.pdf"
-            className="px-8 py-3.5 bg-white/5 text-white text-sm font-semibold rounded-full border border-white/10 hover:bg-white/10 transition-all duration-355 transform hover:-translate-y-0.5 hover:scale-[1.02] shadow-[0_0_20px_rgba(0,0,0,0.2)]"
+            className="portfolio-pill-btn px-8 py-3.5 text-sm"
           >
             Download Resume
           </a>

@@ -64,7 +64,7 @@ const itemVariants = {
 
 export default function Contact() {
   return (
-    <section id="contact" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="contact" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute bottom-[-10%] left-[-10%] w-[35%] h-[35%] rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
       <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
@@ -92,7 +92,7 @@ export default function Contact() {
               href="https://mail.google.com/mail/?view=cm&fs=1&to=hamenathmurali@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 w-fit px-6 py-3 apple-btn-crystal text-white text-sm font-semibold rounded-full shadow-[0_0_15px_rgba(59,130,246,0.35)] transition-all duration-300 mt-4 hover:scale-[1.02]"
+              className="portfolio-pill-btn inline-flex items-center gap-2 w-fit px-6 py-3 text-sm mt-4"
             >
               <FiMail size={15} />
               Send me a message

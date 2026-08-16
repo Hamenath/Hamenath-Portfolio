@@ -52,7 +52,7 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="experience" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute top-[30%] right-[-10%] w-[35%] h-[40%] rounded-full bg-blue-500/5 blur-[130px] pointer-events-none" />
 

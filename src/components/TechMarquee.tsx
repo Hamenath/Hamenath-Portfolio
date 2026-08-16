@@ -35,7 +35,7 @@ const techs = [
 
 export default function TechMarquee() {
   return (
-    <section className="py-12 bg-[#020203] border-t border-white/5 overflow-hidden">
+    <section className="py-12 bg-background border-t border-white/5 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 mb-6">
         <span className="text-xs uppercase font-bold tracking-widest text-slate-500 font-heading">
           Tech Stack Suite

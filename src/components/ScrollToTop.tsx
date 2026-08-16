@@ -36,7 +36,7 @@ export default function ScrollToTop() {
           exit={{ opacity: 0, scale: 0.8, y: 10 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-11 h-11 bg-neutral-950 text-white rounded-full shadow-lg hover:bg-neutral-800 active:scale-95 transition-all duration-200"
+          className="fixed bottom-6 right-6 z-50 portfolio-pill-btn w-11 h-11 border border-white/12 shadow-lg"
           aria-label="Scroll to top"
         >
           <HiArrowUp size={20} />

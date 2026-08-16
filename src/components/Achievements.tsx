@@ -77,7 +77,7 @@ const itemVariants = {
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="achievements" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute top-[20%] left-[-10%] w-[35%] h-[35%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
 
@@ -107,7 +107,7 @@ export default function Achievements() {
                   <motion.div
                     key={idx}
                     variants={itemVariants}
-                    className="group relative flex items-center justify-center rounded-3xl apple-crystal min-h-[280px] overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(234,179,8,0.02)]"
+                    className="group relative flex items-center justify-center rounded-3xl apple-crystal min-h-70 overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(234,179,8,0.02)]"
                   >
                     <Awards
                       variant="award"

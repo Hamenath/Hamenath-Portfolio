@@ -1,7 +1,7 @@
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="py-12 bg-[#020203] relative overflow-hidden">
+    <footer className="py-12 bg-background relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="w-[98%] mx-auto py-8 px-6 sm:px-10 rounded-3xl apple-crystal flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_15px_30px_rgba(0,0,0,0.6)]">
           <div className="flex flex-col gap-1.5 text-center md:text-left">

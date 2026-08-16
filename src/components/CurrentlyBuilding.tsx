@@ -14,7 +14,7 @@ const roadmapItems = [
 
 export default function CurrentlyBuilding() {
   return (
-    <section id="currently-building" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="currently-building" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute top-[20%] right-[-10%] w-[30%] h-[40%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
 
@@ -62,7 +62,7 @@ export default function CurrentlyBuilding() {
                       whileInView={{ width: '65%' }}
                       viewport={{ once: true }}
                       transition={{ duration: 1.5, ease: 'easeOut' }}
-                      className="h-full bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full"
+                      className="h-full bg-linear-to-r from-blue-600 to-cyan-500 rounded-full"
                     />
                   </div>
                 </div>

@@ -91,7 +91,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="projects" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute top-[10%] left-[-15%] w-[40%] h-[40%] rounded-full bg-cyan-500/5 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-15%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[140px] pointer-events-none" />
@@ -146,7 +146,7 @@ export default function Projects() {
                     href="https://lanzy.online"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-3 apple-btn-crystal text-white text-sm font-semibold rounded-full shadow-[0_0_15px_rgba(59,130,246,0.35)] transition-all duration-300 transform hover:-translate-y-0.5"
+                    className="portfolio-pill-btn px-6 py-3 text-sm flex items-center gap-2"
                   >
                     <HiExternalLink size={16} />
                     Live Site
@@ -155,7 +155,7 @@ export default function Projects() {
                     href="https://github.com/Hamenath/Lanzy-production-1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-3 bg-transparent text-blue-400 hover:text-blue-300 text-sm font-semibold transition-all duration-300 hover:translate-x-1"
+                    className="portfolio-pill-btn px-6 py-3 text-sm flex items-center gap-2"
                   >
                     <FiGithub size={16} />
                     View Repository
@@ -164,7 +164,7 @@ export default function Projects() {
               </div>
 
               {/* Right/Bottom Image Showcase */}
-              <div className="lg:col-span-6 relative aspect-video lg:aspect-auto w-full h-full min-h-[250px] lg:min-h-[380px] bg-black/40 rounded-2xl overflow-hidden border border-white/5 group shadow-2xl">
+              <div className="lg:col-span-6 relative aspect-video lg:aspect-auto w-full h-full min-h-62.5 lg:min-h-95 bg-black/40 rounded-2xl overflow-hidden border border-white/5 group shadow-2xl">
                 <Image
                   src="/images/lanzy.png"
                   alt="Lanzy Platform"
@@ -172,7 +172,7 @@ export default function Projects() {
                   className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                   sizes="(max-width: 1024px) 100vw, 500px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-4 py-2 apple-btn-crystal text-white text-xs font-semibold rounded-full"
+                      className="portfolio-pill-btn px-4 py-2 text-xs flex items-center gap-1.5"
                     >
                       <HiExternalLink size={13} />
                       Live Demo
@@ -237,7 +237,7 @@ export default function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-4 py-2 bg-white/5 text-slate-300 hover:text-white text-xs font-semibold rounded-full border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02]"
+                      className="portfolio-pill-btn px-4 py-2 text-xs flex items-center gap-1.5"
                     >
                       <FiGithub size={13} />
                       Repository

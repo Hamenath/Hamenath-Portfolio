@@ -83,7 +83,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={(e) => handleClick(e, '#contact')}
-              className="text-xs font-semibold px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-full transition-all duration-300 border border-white/10 hover:border-blue-500/50 shadow-[0_0_20px_rgba(255,255,255,0.02)] hover:shadow-[0_0_25px_rgba(228,24,79,0.2)]"
+              className="portfolio-pill-btn text-xs px-5 py-2"
             >
               Hire Me
             </a>
@@ -92,7 +92,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-1.5 text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-colors border border-white/5"
+            className="md:hidden p-2 text-slate-300 hover:text-white transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             {isOpen ? <HiX size={20} /> : <HiMenu size={20} />}
@@ -108,7 +108,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-6 top-[80px] z-40 bg-black/90 border border-white/8 backdrop-blur-xl rounded-3xl flex flex-col p-6 shadow-2xl md:hidden"
+            className="fixed inset-x-6 top-20 z-40 bg-black/90 border border-white/8 backdrop-blur-xl rounded-3xl flex flex-col p-6 shadow-2xl md:hidden"
           >
             <nav className="flex flex-col space-y-6">
               {navLinks.map((link) => (
@@ -124,7 +124,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={(e) => handleClick(e, '#contact')}
-                className="inline-block text-center text-sm font-semibold px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-colors shadow-[0_0_15px_rgba(228,24,79,0.3)]"
+                className="portfolio-pill-btn w-full text-center text-sm py-3"
               >
                 Hire Me
               </a>

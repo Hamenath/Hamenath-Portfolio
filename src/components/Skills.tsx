@@ -88,7 +88,7 @@ const cardVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-padding bg-[#020203] border-t border-white/5 relative overflow-hidden">
+    <section id="skills" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
       {/* Background glow offsets */}
       <div className="absolute top-[20%] left-[-10%] w-[30%] h-[40%] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
 
