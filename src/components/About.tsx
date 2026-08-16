@@ -64,12 +64,6 @@ function Counter({ value, suffix = '' }: CounterProps) {
 
 const timelineEvents = [
   {
-    year: 'Currently',
-    role: 'Building Lanzy',
-    company: 'Studio GENZ',
-    description: 'Developing Lanzy, the next-generation freelancer marketplace for creative professionals, focusing on AI discovery and portfolio sharing.',
-  },
-  {
     year: '2026',
     role: 'Founder',
     company: 'Studio GENZ',
