@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { HiArrowDown } from 'react-icons/hi';
+import { HiArrowDown, HiArrowRight, HiDownload } from 'react-icons/hi';
 import AnimatedGradient from './ui/animated-gradient';
 
 export default function Hero() {
@@ -104,16 +104,22 @@ export default function Hero() {
         >
           <button
             onClick={() => scrollToSection('contact')}
-            className="portfolio-pill-btn px-8 py-3.5 text-sm"
+            className="portfolio-pill-btn px-6 py-3.5 text-sm gap-3 font-semibold group"
           >
-            Contact Me
+            <span>Contact Me</span>
+            <span className="p-1.5 rounded-full bg-white/10 text-white group-hover:translate-x-0.5 transition-transform">
+              <HiArrowRight size={14} />
+            </span>
           </button>
           <a
             href="/HamenathResumefinal.pdf"
             download="Hamenath_B_Resume.pdf"
-            className="portfolio-pill-btn px-8 py-3.5 text-sm"
+            className="portfolio-pill-btn px-6 py-3.5 text-sm gap-3 font-semibold group"
           >
-            Download Resume
+            <span>Download Resume</span>
+            <span className="p-1.5 rounded-full bg-white/10 text-white group-hover:translate-y-0.5 transition-transform">
+              <HiDownload size={14} />
+            </span>
           </a>
         </motion.div>
       </div>
