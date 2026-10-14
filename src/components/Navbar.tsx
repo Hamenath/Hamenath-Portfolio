@@ -1,10 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { HiMenuAlt4, HiX } from 'react-icons/hi';
+import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
+import StaggeredMenu, { StaggeredMenuItem, StaggeredMenuSocialItem } from './StaggeredMenu';
 
 const navLinks = [
   { name: 'Work', href: '#work' },
@@ -13,40 +11,14 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
+const socialItems: StaggeredMenuSocialItem[] = [
+  { label: 'GitHub', link: 'https://github.com/Hamenath' },
+  { label: 'LinkedIn', link: 'https://www.linkedin.com/in/hamenathbdesigner' },
+  { label: 'WhatsApp', link: 'https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project.' },
+  { label: 'X / Twitter', link: 'https://x.com/HamenathOffi' },
+];
+
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
-
-  useGSAP(() => {
-    if (headerRef.current) {
-      gsap.from(headerRef.current, {
-        y: -20,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      });
-    }
-  }, { scope: headerRef });
-
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const id = href.replace('#', '');
@@ -59,32 +31,41 @@ export default function Navbar() {
         behavior: 'smooth',
       });
     }
-    setIsOpen(false);
   };
 
-  return (
-    <>
-      <header
-        ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/90 backdrop-blur-md border-b border-border py-4'
-            : 'bg-transparent py-6'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-          {/* Hamenath Wordmark */}
-          <a
-            href="#home"
-            onClick={(e) => scrollTo(e, '#home')}
-            className="text-lg font-semibold tracking-tight text-[#171717] font-heading hover:opacity-80 transition-opacity"
-            aria-label="Hamenath - Back to top"
-          >
-            Hamenath
-          </a>
+  const menuItems: StaggeredMenuItem[] = [
+    { label: 'Home', ariaLabel: 'Go to home section', link: '#home', onClick: (e) => scrollTo(e, '#home') },
+    { label: 'Work', ariaLabel: 'View selected projects', link: '#work', onClick: (e) => scrollTo(e, '#work') },
+    { label: 'Services', ariaLabel: 'View freelance services', link: '#services', onClick: (e) => scrollTo(e, '#services') },
+    { label: 'About', ariaLabel: 'About Hamenath', link: '#about', onClick: (e) => scrollTo(e, '#about') },
+    { label: 'Contact', ariaLabel: 'Get in touch', link: '#contact', onClick: (e) => scrollTo(e, '#contact') },
+  ];
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+  return (
+    <StaggeredMenu
+      position="right"
+      isFixed={true}
+      items={menuItems}
+      socialItems={socialItems}
+      displaySocials={true}
+      displayItemNumbering={true}
+      colors={['#171717', '#262626', '#f0f0f0']}
+      menuButtonColor="#171717"
+      openMenuButtonColor="#171717"
+      accentColor="#171717"
+      logoNode={
+        <a
+          href="#home"
+          onClick={(e) => scrollTo(e, '#home')}
+          className="text-lg font-semibold tracking-tight text-[#171717] font-heading hover:opacity-80 transition-opacity"
+          aria-label="Hamenath - Back to top"
+        >
+          Hamenath
+        </a>
+      }
+      headerCenter={
+        <div className="hidden md:flex items-center gap-8">
+          <nav className="flex items-center gap-7" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -96,65 +77,35 @@ export default function Navbar() {
               </a>
             ))}
           </nav>
-
-          {/* Primary CTA */}
-          <div className="hidden md:flex items-center">
-            <a
-              href="#contact"
-              onClick={(e) => scrollTo(e, '#contact')}
-              className="btn-primary text-xs"
-            >
-              <span>Start a Project</span>
-              <FiArrowUpRight size={13} />
-            </a>
-          </div>
-
-          {/* Mobile Menu Trigger */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-[#171717] hover:text-black transition-colors focus:outline-none"
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isOpen}
+          <a
+            href="#contact"
+            onClick={(e) => scrollTo(e, '#contact')}
+            className="btn-primary text-xs"
           >
-            {isOpen ? <HiX size={22} /> : <HiMenuAlt4 size={22} />}
-          </button>
+            <span>Start a Project</span>
+            <FiArrowUpRight size={13} />
+          </a>
         </div>
-      </header>
-
-      {/* Mobile Drawer */}
-      {isOpen && (
-        <div className="fixed inset-x-4 top-20 z-40 bg-white border border-border rounded-2xl p-6 shadow-xl md:hidden">
-          <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => scrollTo(e, link.href)}
-                className="text-base font-medium text-[#171717] hover:text-black transition-colors py-1.5 border-b border-border"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="pt-2 flex flex-col gap-3">
-              <a
-                href="#contact"
-                onClick={(e) => scrollTo(e, '#contact')}
-                className="btn-primary w-full text-center text-sm py-3"
-              >
-                Start a Project
-              </a>
-              <a
-                href="https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-whatsapp w-full text-center text-sm py-3"
-              >
-                Chat on WhatsApp
-              </a>
-            </div>
-          </nav>
+      }
+      extraContent={
+        <div className="flex flex-col gap-3 pt-2">
+          <a
+            href="#contact"
+            onClick={(e) => scrollTo(e, '#contact')}
+            className="btn-primary w-full text-center text-sm py-3"
+          >
+            Start a Project
+          </a>
+          <a
+            href="https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-whatsapp w-full text-center text-sm py-3"
+          >
+            Chat on WhatsApp
+          </a>
         </div>
-      )}
-    </>
+      }
+    />
   );
 }
