@@ -7,44 +7,51 @@ import { FiArrowUpRight, FiArrowDown } from 'react-icons/fi';
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
+  const eyebrowRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const copyRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLParagraphElement>(null);
+  const ctaGroupRef = useRef<HTMLDivElement>(null);
+  const availabilityRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.from(headlineRef.current, {
-      y: 28,
-      opacity: 0,
-      duration: 0.85,
-    })
-      .from(
-        copyRef.current,
-        {
-          y: 20,
-          opacity: 0,
-          duration: 0.75,
-        },
-        '-=0.55'
-      )
-      .from(
-        ctaRef.current,
-        {
-          y: 16,
-          opacity: 0,
-          duration: 0.65,
-        },
-        '-=0.45'
-      )
-      .from(
-        labelRef.current,
-        {
-          opacity: 0,
-          duration: 0.6,
-        },
+    // 1. Eyebrow fades in
+    tl.fromTo(
+      eyebrowRef.current,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.5 }
+    )
+      // 2. Headline reveals with subtle upward movement
+      .fromTo(
+        headlineRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.65 },
         '-=0.3'
+      )
+      // 3. Supporting text fades in
+      .fromTo(
+        copyRef.current,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.55 },
+        '-=0.4'
+      )
+      // 4. CTA buttons appear with a small stagger
+      .fromTo(
+        '.hero-cta-btn',
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 },
+        '-=0.35'
+      )
+      // 5. Availability text appears subtly
+      .fromTo(
+        availabilityRef.current,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.45 },
+        '-=0.25'
       );
   }, { scope: containerRef });
 
@@ -64,57 +71,74 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-[85vh] sm:min-h-[88vh] flex items-center justify-center pt-32 pb-20 px-6 bg-white overflow-hidden"
+      className="relative min-h-[88vh] sm:min-h-[90vh] flex items-center justify-center pt-32 sm:pt-36 md:pt-40 pb-20 sm:pb-24 px-6 bg-white overflow-hidden"
     >
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
         
+        {/* Eyebrow Label */}
+        <div
+          ref={eyebrowRef}
+          className="mb-4 sm:mb-5"
+        >
+          <span className="text-[11px] sm:text-xs uppercase font-medium tracking-[0.16em] text-[#737373]">
+            INDEPENDENT DEVELOPER · TAMIL NADU, INDIA
+          </span>
+        </div>
+
         {/* Main Headline */}
         <h1
           ref={headlineRef}
-          className="text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-[#171717] leading-[1.08] max-w-3xl"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-semibold tracking-[-0.035em] text-[#171717] leading-[1.1] sm:leading-[1.06] max-w-3xl"
         >
-          Thoughtful Websites.
-          <span className="block text-[#737373] font-normal mt-1 sm:mt-2">
-            Built for Your Next Step.
+          <span className="block text-[#171717]">
+            I turn ideas into
+          </span>
+          <span className="block text-[#525252] mt-1 sm:mt-1.5 font-medium">
+            thoughtful digital experiences.
           </span>
         </h1>
 
-        {/* Supporting Copy */}
+        {/* Supporting Description */}
         <p
           ref={copyRef}
-          className="text-[#737373] text-base sm:text-lg md:text-xl max-w-xl mt-6 leading-relaxed font-normal"
+          className="text-[#737373] text-base sm:text-lg md:text-xl max-w-xl mx-auto mt-6 sm:mt-7 leading-relaxed font-normal"
         >
-          I design and build modern websites for businesses, startups, and personal brands.
+          I build modern websites and AI-powered experiences for businesses, startups, and personal brands.
         </p>
 
-        {/* CTA Buttons */}
+        {/* Primary and Secondary CTA Buttons */}
         <div
-          ref={ctaRef}
-          className="flex flex-wrap items-center justify-center gap-3.5 mt-8"
+          ref={ctaGroupRef}
+          className="flex flex-wrap items-center justify-center gap-3.5 mt-8 sm:mt-10"
         >
           <button
             onClick={() => scrollTo('contact')}
-            className="btn-primary text-sm px-6 py-3"
+            className="hero-cta-btn btn-primary text-sm px-6 py-3 cursor-pointer"
           >
             <span>Start a Project</span>
             <FiArrowUpRight size={14} />
           </button>
           <button
             onClick={() => scrollTo('work')}
-            className="btn-secondary text-sm px-6 py-3"
+            className="hero-cta-btn btn-secondary text-sm px-6 py-3 cursor-pointer"
           >
-            <span>View My Work</span>
+            <span>Explore My Work</span>
             <FiArrowDown size={14} className="text-[#737373]" />
           </button>
         </div>
 
-        {/* Location Label */}
-        <p
-          ref={labelRef}
-          className="text-xs text-[#a3a3a3] font-medium tracking-wide mt-6"
+        {/* Small Availability Line with Live Pulse Indicator */}
+        <div
+          ref={availabilityRef}
+          className="flex items-center justify-center gap-2 mt-7 sm:mt-8 text-xs text-[#737373] font-medium"
         >
-          Based in Tamil Nadu · Available for remote projects
-        </p>
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>Available for select freelance projects</span>
+        </div>
+
       </div>
     </section>
   );
