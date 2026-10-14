@@ -93,18 +93,18 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="section-padding bg-white border-t border-[#eaeaea]">
+    <section id="contact" ref={sectionRef} className="section-padding bg-white border-t border-border">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Section Header */}
         <div className="contact-reveal max-w-2xl mb-14 sm:mb-16 md:mb-20">
-          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-[#737373] block mb-2.5">
+          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-text-secondary block mb-2.5">
             Contact
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[#171717] leading-tight">
             Have a Project in Mind?
           </h2>
-          <p className="text-[#737373] text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
+          <p className="text-text-secondary text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
             Tell me what you&apos;re planning. Let&apos;s build something useful.
           </p>
         </div>
@@ -114,12 +114,12 @@ export default function Contact() {
           
           {/* Direct Outreach Channels */}
           <div className="contact-reveal lg:col-span-5 flex flex-col gap-6">
-            <div className="bg-[#f7f7f7] border border-[#eaeaea] rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
+            <div className="bg-surface border border-border rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
               <div>
                 <h3 className="text-xl font-semibold text-[#171717] tracking-tight">
                   Direct Channels
                 </h3>
-                <p className="text-xs sm:text-sm text-[#737373] mt-2 leading-relaxed">
+                <p className="text-xs sm:text-sm text-text-secondary mt-2 leading-relaxed">
                   Prefer a direct conversation? Message me on WhatsApp for the fastest reply or send an email with your project details.
                 </p>
               </div>
@@ -146,16 +146,16 @@ export default function Contact() {
                     <FiMail size={15} />
                     <span>hamenathmurali@gmail.com</span>
                   </span>
-                  <FiArrowUpRight size={14} className="text-[#737373] group-hover:text-[#171717] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <FiArrowUpRight size={14} className="text-text-secondary group-hover:text-[#171717] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
 
-              <div className="pt-6 border-t border-[#eaeaea] flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-xs text-[#737373]">
+              <div className="pt-6 border-t border-border flex flex-col gap-3">
+                <div className="flex items-center gap-3 text-xs text-text-secondary">
                   <FiClock className="text-[#171717] shrink-0" size={15} />
                   <span>Prompt response within 24 hours</span>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-[#737373]">
+                <div className="flex items-center gap-3 text-xs text-text-secondary">
                   <FiMapPin className="text-[#171717] shrink-0" size={15} />
                   <span>Tamil Nadu, India · Working with clients worldwide</span>
                 </div>
@@ -165,7 +165,7 @@ export default function Contact() {
 
           {/* Form */}
           <div className="contact-reveal lg:col-span-7">
-            <div className="bg-[#f7f7f7] border border-[#eaeaea] rounded-2xl p-6 sm:p-8 md:p-10">
+            <div className="bg-surface border border-border rounded-2xl p-6 sm:p-8 md:p-10">
               {submitted ? (
                 <div className="py-10 flex flex-col items-center text-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-[#171717] text-white flex items-center justify-center">
@@ -174,7 +174,7 @@ export default function Contact() {
                   <h3 className="text-2xl font-semibold text-[#171717] tracking-tight">
                     Thank You
                   </h3>
-                  <p className="text-sm text-[#737373] max-w-md leading-relaxed">
+                  <p className="text-sm text-text-secondary max-w-md leading-relaxed">
                     Your project details have been formatted. If WhatsApp did not open automatically, you can also send directly via email:
                   </p>
                   <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
@@ -215,7 +215,7 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Anand Kumar"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-[#171717] text-xs sm:text-sm placeholder:text-text-muted focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
 
@@ -230,7 +230,7 @@ export default function Contact() {
                         value={formData.business}
                         onChange={handleChange}
                         placeholder="e.g. Horizon Studios"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-[#171717] text-xs sm:text-sm placeholder:text-text-muted focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -249,7 +249,7 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="anand@example.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-[#171717] text-xs sm:text-sm placeholder:text-text-muted focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
 
@@ -264,7 +264,7 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+91 98765 43210"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-[#171717] text-xs sm:text-sm placeholder:text-text-muted focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -280,7 +280,7 @@ export default function Contact() {
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm focus:border-[#171717] focus:outline-none transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-[#171717] text-xs sm:text-sm focus:border-[#171717] focus:outline-none transition-colors cursor-pointer"
                       >
                         <option value="Business Website">Business Website</option>
                         <option value="Startup Website">Startup Website</option>
@@ -300,7 +300,7 @@ export default function Contact() {
                         name="budget"
                         value={formData.budget}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm focus:border-[#171717] focus:outline-none transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-[#171717] text-xs sm:text-sm focus:border-[#171717] focus:outline-none transition-colors cursor-pointer"
                       >
                         <option value="₹15,000 - ₹35,000">₹15,000 - ₹35,000</option>
                         <option value="₹35,000 - ₹75,000">₹35,000 - ₹75,000</option>
@@ -324,7 +324,7 @@ export default function Contact() {
                       value={formData.description}
                       onChange={handleChange}
                       placeholder="Briefly describe what you'd like to build, your goals, or any reference websites you like..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-border text-[#171717] text-xs sm:text-sm placeholder:text-text-muted focus:border-[#171717] focus:outline-none transition-colors resize-none"
                     />
                   </div>
 
@@ -343,7 +343,7 @@ export default function Contact() {
                       </>
                     )}
                   </button>
-                  <p className="text-[11px] text-[#737373] text-center">
+                  <p className="text-[11px] text-text-secondary text-center">
                     No spam. Your information is kept completely private.
                   </p>
                 </form>

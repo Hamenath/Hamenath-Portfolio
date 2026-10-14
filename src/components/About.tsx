@@ -51,7 +51,7 @@ export default function About() {
   }, { scope: containerRef });
 
   return (
-    <section id="about" ref={containerRef} className="section-padding bg-[#f7f7f7] border-t border-[#eaeaea]">
+    <section id="about" ref={containerRef} className="section-padding bg-surface border-t border-border">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -59,7 +59,7 @@ export default function About() {
           {/* Left Column: Portrait & Intro */}
           <div ref={leftColRef} className="lg:col-span-5 flex flex-col gap-6">
             <div>
-              <span className="text-xs uppercase font-semibold tracking-[0.14em] text-[#737373] block mb-2.5">
+              <span className="text-xs uppercase font-semibold tracking-[0.14em] text-text-secondary block mb-2.5">
                 About
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[#171717] leading-tight">
@@ -68,7 +68,7 @@ export default function About() {
             </div>
 
             {/* Clean Portrait Frame */}
-            <div className="relative w-full aspect-4/5 max-w-sm rounded-2xl overflow-hidden bg-white border border-[#eaeaea] shadow-xs">
+            <div className="relative w-full aspect-4/5 max-w-sm rounded-2xl overflow-hidden bg-white border border-border shadow-xs">
               <Image
                 src="/images/profile.jpeg"
                 alt="Hamenath B"
@@ -85,22 +85,22 @@ export default function About() {
               <p className="font-medium text-xl sm:text-2xl text-[#171717] leading-snug tracking-tight">
                 I&apos;m Hamenath, a developer focused on building thoughtful websites and useful digital experiences.
               </p>
-              <p className="text-[#737373] text-sm sm:text-base leading-[1.65]">
+              <p className="text-text-secondary text-sm sm:text-base leading-[1.65]">
                 I help business owners, startups, and founders translate their goals into clean, well-engineered web products. My approach is rooted in simplicity: clear communication, fast mobile loading, and interfaces that feel effortless to navigate.
               </p>
-              <p className="text-[#737373] text-sm sm:text-base leading-[1.65]">
+              <p className="text-text-secondary text-sm sm:text-base leading-[1.65]">
                 Whether you need a new website to establish credibility or want to modernize an existing platform, I work directly with you from concept to launch.
               </p>
             </div>
 
             {/* Verified Highlights */}
-            <div className="pt-6 border-t border-[#eaeaea] flex flex-col gap-3.5">
-              <span className="text-xs uppercase font-semibold tracking-wider text-[#a3a3a3]">
+            <div className="pt-6 border-t border-border flex flex-col gap-3.5">
+              <span className="text-xs uppercase font-semibold tracking-wider text-text-muted">
                 Quick Facts &amp; Experience
               </span>
               {backgroundPoints.map((point, idx) => (
-                <div key={idx} className="flex items-start gap-3 text-sm text-[#737373]">
-                  <span className="w-5 h-5 rounded-full bg-white border border-[#eaeaea] flex items-center justify-center shrink-0 text-[#171717] mt-0.5">
+                <div key={idx} className="flex items-start gap-3 text-sm text-text-secondary">
+                  <span className="w-5 h-5 rounded-full bg-white border border-border flex items-center justify-center shrink-0 text-[#171717] mt-0.5">
                     <FiCheck size={11} />
                   </span>
                   <span className="leading-snug">{point}</span>

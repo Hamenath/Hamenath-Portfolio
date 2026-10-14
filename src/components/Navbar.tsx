@@ -68,7 +68,7 @@ export default function Navbar() {
         ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/90 backdrop-blur-md border-b border-[#eaeaea] py-4'
+            ? 'bg-white/90 backdrop-blur-md border-b border-border py-4'
             : 'bg-transparent py-6'
         }`}
       >
@@ -90,7 +90,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollTo(e, link.href)}
-                className="text-sm font-medium text-[#737373] hover:text-[#171717] transition-colors duration-150 py-1"
+                className="text-sm font-medium text-text-secondary hover:text-[#171717] transition-colors duration-150 py-1"
               >
                 {link.name}
               </a>
@@ -123,14 +123,14 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="fixed inset-x-4 top-20 z-40 bg-white border border-[#eaeaea] rounded-2xl p-6 shadow-xl md:hidden">
+        <div className="fixed inset-x-4 top-20 z-40 bg-white border border-border rounded-2xl p-6 shadow-xl md:hidden">
           <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollTo(e, link.href)}
-                className="text-base font-medium text-[#171717] hover:text-black transition-colors py-1.5 border-b border-[#eaeaea]"
+                className="text-base font-medium text-[#171717] hover:text-black transition-colors py-1.5 border-b border-border"
               >
                 {link.name}
               </a>

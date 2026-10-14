@@ -77,31 +77,31 @@ export default function Services() {
   };
 
   return (
-    <section id="services" ref={sectionRef} className="section-padding bg-white border-t border-[#eaeaea]">
+    <section id="services" ref={sectionRef} className="section-padding bg-white border-t border-border">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Section Heading */}
         <div className="max-w-xl mb-14 sm:mb-16 md:mb-20">
-          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-[#737373] block mb-2.5">
+          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-text-secondary block mb-2.5">
             Services
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[#171717] leading-tight">
             What I Do
           </h2>
-          <p className="text-[#737373] text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
+          <p className="text-text-secondary text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
             Thoughtful design and clean frontend engineering for businesses, startups, and individuals.
           </p>
         </div>
 
         {/* Minimal Editorial List */}
-        <div className="flex flex-col border-t border-[#eaeaea]">
+        <div className="flex flex-col border-t border-border">
           {services.map((service) => (
             <div
               key={service.number}
-              className="service-row py-7 sm:py-9 border-b border-[#eaeaea] grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start sm:items-center group"
+              className="service-row py-7 sm:py-9 border-b border-border grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start sm:items-center group"
             >
               <div className="md:col-span-1">
-                <span className="text-xs font-mono text-[#a3a3a3]">
+                <span className="text-xs font-mono text-text-muted">
                   {service.number}
                 </span>
               </div>
@@ -113,7 +113,7 @@ export default function Services() {
               </div>
 
               <div className="md:col-span-5">
-                <p className="text-[#737373] text-sm sm:text-base leading-relaxed">
+                <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
                   {service.description}
                 </p>
               </div>
@@ -121,7 +121,7 @@ export default function Services() {
               <div className="md:col-span-2 flex md:justify-end pt-2 md:pt-0">
                 <button
                   onClick={() => selectService(service.projectType)}
-                  className="text-xs font-medium text-[#737373] group-hover:text-[#171717] flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-xs font-medium text-text-secondary group-hover:text-[#171717] flex items-center gap-1 transition-colors cursor-pointer"
                 >
                   <span>Inquire</span>
                   <FiArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

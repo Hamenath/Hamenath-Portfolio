@@ -61,11 +61,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-[#eaeaea] bg-white py-12 sm:py-16">
+    <footer className="border-t border-border bg-white py-12 sm:py-16">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-[#eaeaea]">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-border">
           {/* Brand Info */}
           <div className="max-w-sm">
             <a
@@ -75,13 +75,13 @@ export default function Footer() {
             >
               Hamenath
             </a>
-            <p className="text-xs text-[#737373] leading-relaxed">
+            <p className="text-xs text-text-secondary leading-relaxed">
               Designing and building thoughtful websites for businesses, startups, and personal brands.
             </p>
           </div>
 
           {/* Essential Navigation Links */}
-          <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-[#737373]" aria-label="Footer Navigation">
+          <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-text-secondary" aria-label="Footer Navigation">
             {footerNav.map((link) => (
               <a
                 key={link.name}
@@ -105,7 +105,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.name}
-                  className="w-8 h-8 rounded-full bg-[#f7f7f7] border border-[#eaeaea] flex items-center justify-center text-[#737373] hover:text-[#171717] hover:border-[#171717] transition-all"
+                  className="w-8 h-8 rounded-full bg-surface border border-border flex items-center justify-center text-text-secondary hover:text-[#171717] hover:border-[#171717] transition-all"
                 >
                   <Icon size={14} />
                 </a>
@@ -115,7 +115,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Row: Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#a3a3a3]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
           <p>&copy; {currentYear} Hamenath. All rights reserved.</p>
           <p>Based in Tamil Nadu · Built with Next.js</p>
         </div>

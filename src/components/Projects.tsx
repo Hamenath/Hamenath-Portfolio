@@ -95,18 +95,18 @@ export default function Projects() {
   }, { scope: sectionRef });
 
   return (
-    <section id="work" ref={sectionRef} className="section-padding bg-[#f7f7f7] border-t border-[#eaeaea]">
+    <section id="work" ref={sectionRef} className="section-padding bg-surface border-t border-border">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Section Heading */}
         <div className="max-w-2xl mb-14 sm:mb-16 md:mb-20">
-          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-[#737373] block mb-2.5">
+          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-text-secondary block mb-2.5">
             Selected Work
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[#171717] leading-tight">
             Recent Projects
           </h2>
-          <p className="text-[#737373] text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
+          <p className="text-text-secondary text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
             A selection of websites, applications, and digital tools I have designed and engineered.
           </p>
         </div>
@@ -122,11 +122,11 @@ export default function Projects() {
             >
               {/* Image Preview Container */}
               <div
-                className={`w-full rounded-2xl overflow-hidden bg-white border border-[#eaeaea] shadow-xs group ${
+                className={`w-full rounded-2xl overflow-hidden bg-white border border-border shadow-xs group ${
                   idx % 2 === 1 ? 'lg:col-span-7 lg:order-2' : 'lg:col-span-7 lg:order-1'
                 }`}
               >
-                <div className="relative aspect-16/10 w-full overflow-hidden bg-[#f0f0f0]">
+                <div className="relative aspect-16/10 w-full overflow-hidden bg-surface-hover">
                   <Image
                     src={project.image}
                     alt={`${project.title} project preview`}
@@ -143,7 +143,7 @@ export default function Projects() {
                   idx % 2 === 1 ? 'lg:col-span-5 lg:order-1' : 'lg:col-span-5 lg:order-2'
                 }`}
               >
-                <span className="text-xs font-medium text-[#737373]">
+                <span className="text-xs font-medium text-text-secondary">
                   {project.category}
                 </span>
 
@@ -151,7 +151,7 @@ export default function Projects() {
                   {project.title}
                 </h3>
 
-                <p className="text-[#737373] text-sm sm:text-base leading-relaxed">
+                <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
                   {project.description}
                 </p>
 

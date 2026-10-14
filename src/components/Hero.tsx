@@ -90,7 +90,7 @@ export default function Hero() {
           ref={eyebrowRef}
           className="mb-5 sm:mb-6"
         >
-          <span className="text-[11px] sm:text-xs uppercase font-medium tracking-[0.12em] sm:tracking-[0.14em] text-[#737373]">
+          <span className="text-[11px] sm:text-xs uppercase font-medium tracking-[0.12em] sm:tracking-[0.14em] text-text-secondary">
             INDEPENDENT DEVELOPER · TAMIL NADU, INDIA
           </span>
         </div>
@@ -98,7 +98,7 @@ export default function Hero() {
         {/* Main Headline */}
         <h1
           ref={headlineRef}
-          className="text-[2.125rem] xs:text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-semibold tracking-[-0.03em] sm:tracking-[-0.035em] text-[#171717] leading-[1.16] sm:leading-[1.08] max-w-[340px] xs:max-w-md sm:max-w-2xl md:max-w-3xl lg:max-w-4xl"
+          className="text-[2.125rem] xs:text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-semibold tracking-[-0.03em] sm:tracking-[-0.035em] text-[#171717] leading-[1.16] sm:leading-[1.08] max-w-85 xs:max-w-md sm:max-w-2xl md:max-w-3xl lg:max-w-4xl"
         >
           <span className="block text-[#171717]">
             I turn ideas into
@@ -111,7 +111,7 @@ export default function Hero() {
         {/* Supporting Description */}
         <p
           ref={copyRef}
-          className="text-[#737373] text-base sm:text-lg md:text-[1.125rem] max-w-md sm:max-w-lg md:max-w-xl mx-auto mt-5 sm:mt-6 leading-[1.65] font-normal"
+          className="text-text-secondary text-base sm:text-lg md:text-[1.125rem] max-w-md sm:max-w-lg md:max-w-xl mx-auto mt-5 sm:mt-6 leading-[1.65] font-normal"
         >
           I build modern websites and AI-powered experiences for businesses, startups, and personal brands.
         </p>
@@ -133,14 +133,14 @@ export default function Hero() {
             className="hero-cta-btn btn-secondary text-sm px-6 py-3 cursor-pointer"
           >
             <span>Explore My Work</span>
-            <FiArrowDown size={14} className="text-[#737373]" />
+            <FiArrowDown size={14} className="text-text-secondary" />
           </button>
         </div>
 
         {/* Small Availability Line with Live Pulse Indicator */}
         <div
           ref={availabilityRef}
-          className="flex items-center justify-center gap-2 mt-5 sm:mt-6 text-xs text-[#737373] font-normal sm:font-medium"
+          className="flex items-center justify-center gap-2 mt-5 sm:mt-6 text-xs text-text-secondary font-normal sm:font-medium"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
