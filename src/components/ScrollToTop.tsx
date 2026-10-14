@@ -32,7 +32,7 @@ export default function ScrollToTop() {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-surface-hover border border-white/10 text-slate-300 hover:text-white hover:border-white/20 flex items-center justify-center shadow-lg transition-colors cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-white border border-[#eaeaea] text-[#171717] hover:bg-[#f7f7f7] hover:border-[#171717] flex items-center justify-center shadow-md transition-all cursor-pointer"
           aria-label="Back to top"
         >
           <FiArrowUp size={16} />

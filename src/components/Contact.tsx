@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { 
   FiMail, 
   FiCheckCircle, 
@@ -11,6 +13,10 @@ import {
   FiClock
 } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -26,8 +32,9 @@ export default function Contact() {
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Listen to select-project-type events from Services and Pricing
+  // Listen to select-project-type events from Services
   useEffect(() => {
     const handleSelectType = (e: Event) => {
       const customEvent = e as CustomEvent<string>;
@@ -38,6 +45,22 @@ export default function Contact() {
     window.addEventListener('select-project-type', handleSelectType);
     return () => window.removeEventListener('select-project-type', handleSelectType);
   }, []);
+
+  useGSAP(() => {
+    if (sectionRef.current) {
+      gsap.from('.contact-reveal', {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out',
+      });
+    }
+  }, { scope: sectionRef });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -50,7 +73,6 @@ export default function Contact() {
     e.preventDefault();
     setSubmitting(true);
 
-    // Format a comprehensive message for direct WhatsApp outreach or email
     const textMsg = `Hi Hamenath, I'm reaching out regarding a project:
 - Name: ${formData.name}
 - Business: ${formData.business || 'N/A'}
@@ -61,53 +83,48 @@ export default function Contact() {
 - Budget: ${formData.budget}
 - Description: ${formData.description}`;
 
-    // Create WhatsApp URL
     const waUrl = `https://wa.me/919361661708?text=${encodeURIComponent(textMsg)}`;
     
-    // Also prepare mailto fallback link
-    const mailtoUrl = `mailto:hamenathmurali@gmail.com?subject=${encodeURIComponent(
-      `Project Enquiry: ${formData.projectType} - ${formData.name}`
-    )}&body=${encodeURIComponent(textMsg)}`;
-
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
-      // Automatically open WhatsApp in new tab for fastest communication
       window.open(waUrl, '_blank', 'noopener,noreferrer');
-    }, 600);
+    }, 400);
   };
 
   return (
-    <section id="contact" className="section-padding bg-background border-t border-white/6">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" ref={sectionRef} className="section-padding bg-white border-t border-[#eaeaea]">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
-        {/* Top Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
-          <span className="text-xs uppercase font-semibold tracking-wider text-indigo-400 block mb-2">
-            Let&apos;s Connect
+        {/* Section Header */}
+        <div className="contact-reveal max-w-2xl mb-14 sm:mb-16">
+          <span className="text-xs uppercase font-semibold tracking-wider text-[#737373] block mb-2">
+            Contact
           </span>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-white leading-tight mb-4">
-            Have a project in mind?
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#171717] leading-tight">
+            Have a Project in Mind?
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Tell me what you&apos;re building. I&apos;ll help you figure out the right digital solution, technical architecture, and realistic timeline.
+          <p className="text-[#737373] text-base sm:text-lg mt-3 leading-relaxed">
+            Tell me what you&apos;re planning. Let&apos;s build something useful.
           </p>
         </div>
 
-        {/* Two-Column Grid: Left Contact Info / Right Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* Left Column: Quick Channels */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="enterprise-card p-6 sm:p-7 flex flex-col gap-6">
-              <h3 className="text-xl font-semibold text-white tracking-tight">
-                Direct Channels
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Prefer a quick chat? Reach out directly via WhatsApp for fastest response or send an email with your project brief.
-              </p>
+          {/* Direct Outreach Channels */}
+          <div className="contact-reveal lg:col-span-5 flex flex-col gap-6">
+            <div className="bg-[#f7f7f7] border border-[#eaeaea] rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
+              <div>
+                <h3 className="text-xl font-semibold text-[#171717] tracking-tight">
+                  Direct Channels
+                </h3>
+                <p className="text-xs sm:text-sm text-[#737373] mt-2 leading-relaxed">
+                  Prefer a direct conversation? Message me on WhatsApp for the fastest reply or send an email with your project details.
+                </p>
+              </div>
 
-              <div className="flex flex-col gap-3.5 pt-2">
+              <div className="flex flex-col gap-3">
                 <a
                   href="https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
                   target="_blank"
@@ -123,47 +140,42 @@ export default function Contact() {
 
                 <a
                   href="mailto:hamenathmurali@gmail.com?subject=Project%20Enquiry%20from%20hamenath.online"
-                  className="btn-secondary py-3 px-5 text-xs w-full justify-between group hover:bg-white/6"
+                  className="btn-secondary py-3 px-5 text-xs w-full justify-between group"
                 >
-                  <span className="flex items-center gap-2 font-medium">
+                  <span className="flex items-center gap-2 font-medium text-[#171717]">
                     <FiMail size={15} />
-                    <span>Email Me Directly</span>
+                    <span>hamenathmurali@gmail.com</span>
                   </span>
-                  <FiArrowUpRight size={14} className="text-slate-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <FiArrowUpRight size={14} className="text-[#737373] group-hover:text-[#171717] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
 
-              {/* Guarantees & Location */}
-              <div className="pt-6 border-t border-white/6 flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-xs text-slate-400">
-                  <FiClock className="text-indigo-400 shrink-0" size={15} />
-                  <span>Prompt response within 24 business hours</span>
+              <div className="pt-6 border-t border-[#eaeaea] flex flex-col gap-3">
+                <div className="flex items-center gap-3 text-xs text-[#737373]">
+                  <FiClock className="text-[#171717] shrink-0" size={15} />
+                  <span>Prompt response within 24 hours</span>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-slate-400">
-                  <FiMapPin className="text-indigo-400 shrink-0" size={15} />
-                  <span>Tamil Nadu, India · Available for local &amp; remote projects</span>
+                <div className="flex items-center gap-3 text-xs text-[#737373]">
+                  <FiMapPin className="text-[#171717] shrink-0" size={15} />
+                  <span>Tamil Nadu, India · Working with clients worldwide</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Project Enquiry Form */}
-          <div className="lg:col-span-7">
-            <div className="enterprise-card p-6 sm:p-8 md:p-10">
+          {/* Form */}
+          <div className="contact-reveal lg:col-span-7">
+            <div className="bg-[#f7f7f7] border border-[#eaeaea] rounded-2xl p-6 sm:p-8 md:p-10">
               {submitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="py-12 flex flex-col items-center text-center gap-4"
-                >
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                    <FiCheckCircle size={28} />
+                <div className="py-10 flex flex-col items-center text-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#171717] text-white flex items-center justify-center">
+                    <FiCheckCircle size={24} />
                   </div>
-                  <h3 className="text-2xl font-semibold text-white tracking-tight">
-                    Enquiry Prepared!
+                  <h3 className="text-2xl font-semibold text-[#171717] tracking-tight">
+                    Thank You
                   </h3>
-                  <p className="text-sm text-slate-400 max-w-md leading-relaxed">
-                    Thank you! Your project details have been formulated. If WhatsApp did not open automatically, you can also send directly via email:
+                  <p className="text-sm text-[#737373] max-w-md leading-relaxed">
+                    Your project details have been formatted. If WhatsApp did not open automatically, you can also send directly via email:
                   </p>
                   <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
                     <a
@@ -173,27 +185,27 @@ export default function Contact() {
                       className="btn-primary text-xs"
                     >
                       <FiMail size={13} />
-                      <span>Send Email Copy</span>
+                      <span>Send via Email</span>
                     </a>
                     <button
                       onClick={() => setSubmitted(false)}
                       className="btn-secondary text-xs"
                     >
-                      <span>Submit Another Enquiry</span>
+                      <span>Submit Another</span>
                     </button>
                   </div>
-                </motion.div>
+                </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                  <h3 className="text-xl font-semibold text-white tracking-tight mb-1">
-                    Project Enquiry Form
+                  <h3 className="text-xl font-semibold text-[#171717] tracking-tight mb-1">
+                    Start a Project
                   </h3>
 
                   {/* Name & Business */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="name" className="text-xs font-medium text-slate-300">
-                        Your Name <span className="text-red-400">*</span>
+                      <label htmlFor="name" className="text-xs font-medium text-[#171717]">
+                        Your Name <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -203,12 +215,12 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Anand Kumar"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/3 border border-white/8 text-white text-xs sm:text-sm placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="business" className="text-xs font-medium text-slate-300">
+                      <label htmlFor="business" className="text-xs font-medium text-[#171717]">
                         Business / Brand Name
                       </label>
                       <input
@@ -217,8 +229,8 @@ export default function Contact() {
                         name="business"
                         value={formData.business}
                         onChange={handleChange}
-                        placeholder="e.g. Horizon Logistics"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/3 border border-white/8 text-white text-xs sm:text-sm placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none transition-colors"
+                        placeholder="e.g. Horizon Studios"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -226,8 +238,8 @@ export default function Contact() {
                   {/* Email & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="email" className="text-xs font-medium text-slate-300">
-                        Email Address <span className="text-red-400">*</span>
+                      <label htmlFor="email" className="text-xs font-medium text-[#171717]">
+                        Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="email"
@@ -237,13 +249,13 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="anand@example.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/3 border border-white/8 text-white text-xs sm:text-sm placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="phone" className="text-xs font-medium text-slate-300">
-                        WhatsApp / Phone <span className="text-indigo-400 text-[10px]">(Fastest reply)</span>
+                      <label htmlFor="phone" className="text-xs font-medium text-[#171717]">
+                        Phone / WhatsApp
                       </label>
                       <input
                         type="tel"
@@ -252,7 +264,7 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+91 98765 43210"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/3 border border-white/8 text-white text-xs sm:text-sm placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -260,7 +272,7 @@ export default function Contact() {
                   {/* Project Type & Budget Range */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="projectType" className="text-xs font-medium text-slate-300">
+                      <label htmlFor="projectType" className="text-xs font-medium text-[#171717]">
                         Project Type
                       </label>
                       <select
@@ -268,70 +280,51 @@ export default function Contact() {
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-hover border border-white/8 text-white text-xs sm:text-sm focus:border-indigo-500 focus:outline-none transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm focus:border-[#171717] focus:outline-none transition-colors cursor-pointer"
                       >
                         <option value="Business Website">Business Website</option>
                         <option value="Startup Website">Startup Website</option>
-                        <option value="Personal Brand">Personal Portfolio / Brand</option>
-                        <option value="AI Integration">AI Chatbot / Automation</option>
+                        <option value="Portfolio Website">Portfolio Website</option>
+                        <option value="AI Integration">AI Integration</option>
                         <option value="Website Redesign">Website Redesign</option>
-                        <option value="Starter Package">Starter Package</option>
-                        <option value="Business Package">Business Package</option>
-                        <option value="Custom / AI Product">Custom / AI Product</option>
                         <option value="Other">Other / Consultation</option>
                       </select>
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="budget" className="text-xs font-medium text-slate-300">
-                        Estimated Budget Range
+                      <label htmlFor="budget" className="text-xs font-medium text-[#171717]">
+                        Estimated Budget
                       </label>
                       <select
                         id="budget"
                         name="budget"
                         value={formData.budget}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-hover border border-white/8 text-white text-xs sm:text-sm focus:border-indigo-500 focus:outline-none transition-colors cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm focus:border-[#171717] focus:outline-none transition-colors cursor-pointer"
                       >
-                        <option value="₹15,000 - ₹35,000">₹15,000 - ₹35,000 (Starter)</option>
-                        <option value="₹35,000 - ₹75,000">₹35,000 - ₹75,000 (Business)</option>
-                        <option value="₹75,000+">₹75,000+ (Custom / Web App)</option>
+                        <option value="₹15,000 - ₹35,000">₹15,000 - ₹35,000</option>
+                        <option value="₹35,000 - ₹75,000">₹35,000 - ₹75,000</option>
+                        <option value="₹75,000+">₹75,000+</option>
                         <option value="$1,000 - $3,000 USD">$1,000 - $3,000 USD (Remote)</option>
                         <option value="Flexible / Need Guidance">Flexible / Need Guidance</option>
                       </select>
                     </div>
                   </div>
 
-                  {/* Existing Website */}
-                  <div className="flex flex-col gap-1.5">
-                    <label htmlFor="website" className="text-xs font-medium text-slate-300">
-                      Existing Website <span className="text-slate-500">(If redesigning)</span>
-                    </label>
-                    <input
-                      type="url"
-                      id="website"
-                      name="website"
-                      value={formData.website}
-                      onChange={handleChange}
-                      placeholder="https://mycurrentwebsite.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/3 border border-white/8 text-white text-xs sm:text-sm placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none transition-colors"
-                    />
-                  </div>
-
                   {/* Project Description */}
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="description" className="text-xs font-medium text-slate-300">
-                      Project Description &amp; Goals <span className="text-red-400">*</span>
+                    <label htmlFor="description" className="text-xs font-medium text-[#171717]">
+                      Project Details &amp; Goals <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="description"
                       name="description"
                       required
-                      rows={3}
+                      rows={4}
                       value={formData.description}
                       onChange={handleChange}
-                      placeholder="Briefly describe what you are looking to build, your key goals, and any specific requirements..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/3 border border-white/8 text-white text-xs sm:text-sm placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none transition-colors resize-none"
+                      placeholder="Briefly describe what you'd like to build, your goals, or any reference websites you like..."
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#eaeaea] text-[#171717] text-xs sm:text-sm placeholder:text-[#a3a3a3] focus:border-[#171717] focus:outline-none transition-colors resize-none"
                     />
                   </div>
 
@@ -339,19 +332,19 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="btn-primary w-full py-3.5 text-xs sm:text-sm font-semibold tracking-tight mt-2 flex items-center justify-center gap-2"
+                    className="btn-primary w-full py-3.5 text-xs sm:text-sm font-semibold tracking-tight mt-1 flex items-center justify-center gap-2"
                   >
                     {submitting ? (
-                      <span>Preparing Enquiry...</span>
+                      <span>Sending...</span>
                     ) : (
                       <>
-                        <span>Submit Project Enquiry</span>
+                        <span>Start a Project</span>
                         <FiSend size={14} />
                       </>
                     )}
                   </button>
-                  <p className="text-[11px] text-slate-500 text-center">
-                    No spam. Your contact info is kept completely private.
+                  <p className="text-[11px] text-[#737373] text-center">
+                    No spam. Your information is kept completely private.
                   </p>
                 </form>
               )}

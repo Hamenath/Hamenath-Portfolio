@@ -1,147 +1,116 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { FiCheckCircle } from 'react-icons/fi';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { FiCheck } from 'react-icons/fi';
 
-const milestones = [
-  {
-    year: '2026',
-    role: 'Founder & Lead Developer',
-    entity: 'Studio GENZ',
-    summary: 'Building modern digital products, client websites, and custom AI automations for startups and local businesses.',
-  },
-  {
-    year: '2025',
-    role: 'National Winner',
-    entity: 'Smart India Hackathon 2025',
-    summary: 'Awarded 1st place nationally by engineering a high-impact software system under a 36-hour competitive sprint.',
-  },
-  {
-    year: '2025',
-    role: 'Full Stack Engineer',
-    entity: 'VEXA TECH',
-    summary: 'Architected scalable SaaS features, high-throughput backend services, and optimized client rendering pipelines.',
-  },
-  {
-    year: '2024',
-    role: 'Full Stack Developer Intern',
-    entity: 'Lunewise Technologies',
-    summary: 'Developed robust REST APIs, unit test suites, Docker containers, and automated deployment pipelines.',
-  },
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const backgroundPoints = [
+  'Based in Madurai, Tamil Nadu — collaborating with local clients and remote teams worldwide.',
+  'Smart India Hackathon 2025 National Winner — awarded 1st place nationally for building high-impact software.',
+  'Founder of Studio GENZ — designing and delivering bespoke websites and custom AI workflows.',
+  'Professional background in full-stack web development (React, Next.js, Node.js) and Meta Front-End Certification.',
 ];
 
 export default function About() {
+  const containerRef = useRef<HTMLElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (leftColRef.current && rightColRef.current) {
+      gsap.from(leftColRef.current, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      });
+
+      gsap.from(rightColRef.current, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.15,
+        ease: 'power2.out',
+      });
+    }
+  }, { scope: containerRef });
+
   return (
-    <section id="about" className="section-padding bg-background border-t border-white/6">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="about" ref={containerRef} className="section-padding bg-[#f7f7f7] border-t border-[#eaeaea]">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8">
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: Profile Photo & Core Positioning */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          {/* Left Column: Portrait & Intro */}
+          <div ref={leftColRef} className="lg:col-span-5 flex flex-col gap-6">
             <div>
-              <span className="text-xs uppercase font-semibold tracking-wider text-indigo-400 block mb-2">
-                About Me
+              <span className="text-xs uppercase font-semibold tracking-wider text-[#737373] block mb-2">
+                About
               </span>
-              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white leading-tight">
-                Engineering with purpose. Designing with restraint.
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#171717] leading-tight">
+                A Little About Me
               </h2>
             </div>
 
-            {/* Profile Photo Card */}
-            <div className="relative w-full aspect-4/5 max-w-sm rounded-2xl overflow-hidden bg-surface border border-white/8 shadow-lg">
+            {/* Clean Portrait Frame */}
+            <div className="relative w-full aspect-4/5 max-w-sm rounded-2xl overflow-hidden bg-white border border-[#eaeaea] shadow-xs">
               <Image
                 src="/images/profile.jpeg"
-                alt="Hamenath B - AI and Web Engineer"
+                alt="Hamenath B"
                 fill
                 className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
                 sizes="(max-width: 1024px) 100vw, 380px"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-background/80 backdrop-blur-md border border-white/8">
-                <p className="text-xs font-medium text-white">Hamenath B</p>
-                <p className="text-[11px] text-slate-400">AI &amp; Web Engineer · Madurai, Tamil Nadu</p>
-              </div>
-            </div>
-
-            {/* Concise Bio */}
-            <div className="flex flex-col gap-3 text-slate-400 text-sm leading-relaxed">
-              <p>
-                I am an AI and Web Engineer based in Tamil Nadu, dedicated to helping businesses, startups, and founders turn ideas into modern digital products.
-              </p>
-              <p>
-                Rather than treating code as just syntax, I focus on the entire product lifecycle: clear communication, fast mobile performance, intuitive UI, and measurable business outcomes.
-              </p>
             </div>
           </div>
 
-          {/* Right Column: Track Record Timeline */}
-          <div className="lg:col-span-7 flex flex-col gap-8">
-            <div>
-              <span className="text-xs uppercase font-semibold tracking-wider text-slate-400 block mb-2">
-                Experience &amp; Milestones
-              </span>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight">
-                Verified Background &amp; Delivery
-              </h3>
+          {/* Right Column: Authentic Story & Highlights */}
+          <div ref={rightColRef} className="lg:col-span-7 flex flex-col gap-8 lg:pt-8">
+            <div className="flex flex-col gap-4 text-base sm:text-lg text-[#171717] leading-relaxed">
+              <p className="font-medium text-xl sm:text-2xl text-[#171717]">
+                I&apos;m Hamenath, a developer focused on building thoughtful websites and useful digital experiences.
+              </p>
+              <p className="text-[#737373] text-sm sm:text-base">
+                I help business owners, startups, and founders translate their goals into clean, well-engineered web products. My approach is rooted in simplicity: clear communication, fast mobile loading, and interfaces that feel effortless to navigate.
+              </p>
+              <p className="text-[#737373] text-sm sm:text-base">
+                Whether you need a new website to establish credibility or want to modernize an existing platform, I work directly with you from concept to launch.
+              </p>
             </div>
 
-            <div className="flex flex-col gap-4">
-              {milestones.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className="enterprise-card p-5 sm:p-6 flex flex-col gap-2"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-xs font-semibold text-indigo-400 font-mono">
-                      {item.year}
-                    </span>
-                    <span className="text-xs text-slate-500 font-medium">
-                      {item.entity}
-                    </span>
-                  </div>
-
-                  <h4 className="text-base font-semibold text-white tracking-tight">
-                    {item.role}
-                  </h4>
-
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
-                    {item.summary}
-                  </p>
-                </motion.div>
+            {/* Verified Highlights */}
+            <div className="pt-6 border-t border-[#eaeaea] flex flex-col gap-3.5">
+              <span className="text-xs uppercase font-semibold tracking-wider text-[#a3a3a3]">
+                Quick Facts &amp; Experience
+              </span>
+              {backgroundPoints.map((point, idx) => (
+                <div key={idx} className="flex items-start gap-3 text-sm text-[#737373]">
+                  <span className="w-5 h-5 rounded-full bg-white border border-[#eaeaea] flex items-center justify-center shrink-0 text-[#171717] mt-0.5">
+                    <FiCheck size={11} />
+                  </span>
+                  <span className="leading-snug">{point}</span>
+                </div>
               ))}
             </div>
-
-            {/* Certifications Row */}
-            <div className="pt-6 border-t border-white/6">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-3">
-                Professional Certifications
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="p-3.5 rounded-xl bg-white/3 border border-white/6 flex items-center gap-3">
-                  <FiCheckCircle className="text-indigo-400 shrink-0" size={16} />
-                  <div>
-                    <p className="text-xs font-medium text-white">Meta Front-End Developer</p>
-                    <p className="text-[11px] text-slate-500">React, UI Testing &amp; Accessibility</p>
-                  </div>
-                </div>
-                <div className="p-3.5 rounded-xl bg-white/3 border border-white/6 flex items-center gap-3">
-                  <FiCheckCircle className="text-indigo-400 shrink-0" size={16} />
-                  <div>
-                    <p className="text-xs font-medium text-white">Full Stack Web Development</p>
-                    <p className="text-[11px] text-slate-500">Node.js, Express, MongoDB &amp; APIs</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
 
         </div>
+
       </div>
     </section>
   );

@@ -1,39 +1,29 @@
 import Hero from '@/components/Hero';
-import TrustBar from '@/components/TrustBar';
-import Services from '@/components/Services';
 import Projects from '@/components/Projects';
+import Services from '@/components/Services';
 import About from '@/components/About';
-import Process from '@/components/Process';
-import Pricing from '@/components/Pricing';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="bg-background text-text-primary min-h-screen">
-      {/* Hero & Credibility */}
+    <main className="bg-white text-[#171717] min-h-screen">
+      {/* Section B — Hero */}
       <Hero />
-      <TrustBar />
 
-      {/* Services: What I Build for Businesses & Startups */}
-      <Services />
-
-      {/* Selected Work & Deep Case Studies */}
+      {/* Section C — Selected Work */}
       <Projects />
 
-      {/* Professional About & Verified Background */}
+      {/* Section D — Services */}
+      <Services />
+
+      {/* Section E — About */}
       <About />
 
-      {/* Structured 5-Step Delivery Process */}
-      <Process />
-
-      {/* Transparent Pricing & Engagement Models */}
-      <Pricing />
-
-      {/* High-Converting Project Enquiry Form & Conversion Hub */}
+      {/* Section F — Contact */}
       <Contact />
 
-      {/* Minimal Footer */}
+      {/* Footer */}
       <Footer />
     </main>
   );

@@ -1,24 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #090a0f;
-  --color-surface: #10131c;
-  --color-surface-hover: #161a26;
-  --color-surface-elevated: #1a1e2d;
-  
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.16);
-  --color-border-subtle: rgba(255, 255, 255, 0.04);
-  
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
-  
-  --color-accent: #6366f1;
-  --color-accent-hover: #4f46e5;
-  --color-accent-subtle: rgba(99, 102, 241, 0.12);
-  
-  --color-emerald-accent: #10b981;
+  --color-background: #ffffff;
+  --color-surface: #f7f7f7;
+  --color-surface-hover: #f0f0f0;
+  --color-border: #eaeaea;
+  --color-border-hover: #d4d4d4;
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-muted: #a3a3a3;
+  --color-accent: #171717;
   
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-heading: var(--font-outfit), var(--font-inter), sans-serif;
@@ -30,13 +21,14 @@
 }
 
 html {
-  color-scheme: dark;
-  scroll-behavior: auto; /* Managed by Lenis */
+  color-scheme: light;
+  scroll-behavior: smooth;
+  background-color: #ffffff;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
+  background-color: #ffffff;
+  color: #171717;
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -46,49 +38,49 @@ body {
   padding: 0;
 }
 
-/* Custom Scrollbar - Minimal & Non-intrusive */
+/* Minimalist Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090a0f;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e2433;
+  background: #d4d4d4;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #333c52;
+  background: #a3a3a3;
 }
 
 /* Typography Hierarchy */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
+  color: #171717;
+  letter-spacing: -0.025em;
   font-weight: 600;
   margin: 0;
 }
 
 p {
-  color: var(--color-text-secondary);
+  color: #737373;
   line-height: 1.65;
   margin: 0;
 }
 
-/* Accessible Focus States */
+/* Accessible Focus Ring */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #171717;
   outline-offset: 3px;
 }
 
-/* Selection Color */
+/* Selection */
 ::selection {
-  background-color: rgba(99, 102, 241, 0.35);
+  background-color: #171717;
   color: #ffffff;
 }
 
-/* Lenis Scroll Container Rules */
+/* Lenis Scroll Rules */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -103,33 +95,32 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* Enterprise Layout Utilities */
+/* Layout Utilities */
 .section-padding {
-  padding-top: 5.5rem;
-  padding-bottom: 5.5rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 @media (min-width: 768px) {
   .section-padding {
-    padding-top: 7.5rem;
-    padding-bottom: 7.5rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
 }
 
-/* Minimalist Button Tokens */
+/* Apple-inspired Minimal Buttons */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #f8fafc;
-  color: #090a0f;
+  background-color: #171717;
+  color: #ffffff;
   font-weight: 500;
   font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding: 0.6875rem 1.25rem;
+  padding: 0.6875rem 1.375rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid #171717;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
@@ -137,9 +128,9 @@ html.lenis body {
 }
 
 .btn-primary:hover {
-  background-color: #e2e8f0;
+  background-color: #262626;
+  border-color: #262626;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.12);
 }
 
 .btn-secondary {
@@ -147,14 +138,13 @@ html.lenis body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.04);
-  color: #f8fafc;
+  background-color: #ffffff;
+  color: #171717;
   font-weight: 500;
   font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding: 0.6875rem 1.25rem;
+  padding: 0.6875rem 1.375rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #eaeaea;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
@@ -162,8 +152,8 @@ html.lenis body {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.16);
+  background-color: #f7f7f7;
+  border-color: #d4d4d4;
   transform: translateY(-1px);
 }
 
@@ -176,48 +166,22 @@ html.lenis body {
   color: #ffffff;
   font-weight: 500;
   font-size: 0.875rem;
-  padding: 0.6875rem 1.25rem;
+  padding: 0.6875rem 1.375rem;
   border-radius: 9999px;
-  border: 1px solid rgba(37, 211, 102, 0.3);
+  border: 1px solid #128c7e;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-whatsapp:hover {
-  background-color: #075e54;
+  background-color: #0d6e63;
+  border-color: #0d6e63;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
 }
 
-/* Minimalist Enterprise Card */
-.enterprise-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 1.25rem;
-  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
-}
-
-.enterprise-card:hover {
-  border-color: var(--color-border-hover);
-  background-color: var(--color-surface-hover);
-}
-
-/* Clean Badge */
-.subtle-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--color-text-secondary);
-}
-
-/* Micro-interaction & Motion Accessibility */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
