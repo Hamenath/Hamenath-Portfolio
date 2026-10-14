@@ -1,250 +1,409 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { HiExternalLink, HiArrowRight } from 'react-icons/hi';
-import { FiGithub } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiArrowUpRight, FiExternalLink, FiGithub, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
-const otherProjects = [
+interface CaseStudy {
+  id: string;
+  name: string;
+  category: string;
+  tagline: string;
+  role: string;
+  image: string;
+  tech: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  challenge: string;
+  approach: string;
+  build: string;
+  outcome: string;
+  keyFeatures: string[];
+}
+
+const featuredCaseStudies: CaseStudy[] = [
   {
-    title: 'ISER',
-    description: 'A comprehensive research management platform that streamlines academic workflows, paper submissions, and reviewer assignments — built for institutions seeking intelligent document handling.',
-    image: '/images/project-iser.png',
-    techStack: ['Next.js', 'Node.js', 'MongoDB', 'Tailwind CSS'],
-    liveUrl: 'https://github.com/hamenath',
-    githubUrl: 'https://github.com/hamenath',
+    id: 'lanzy',
+    name: 'Lanzy',
+    category: 'Marketplace & Digital Platform',
+    tagline: 'A modern discovery platform connecting creative professionals and businesses with AI-assisted matchmaking.',
+    role: 'Founder & Full Stack Engineer',
+    image: '/images/project-lanzy.png',
+    tech: ['Next.js', 'Firebase', 'Tailwind CSS', 'Framer Motion', 'OpenAI API'],
+    liveUrl: 'https://lanzy.online',
+    githubUrl: 'https://github.com/Hamenath/Lanzy-production-1',
+    challenge:
+      'Independent creative professionals in design and development often struggle to showcase their specialized work through generic resumes, while founders lose hours sifting through unvetted portfolios.',
+    approach:
+      'Engineered a dedicated marketplace prioritizing high-fidelity visual portfolio previews, structured designer capabilities, and an intelligent recommendation layer to help businesses hire the right creative talent faster.',
+    build:
+      'Built with Next.js for high-speed server rendering, Firebase for user authentication and real-time state, styled with vanilla Tailwind CSS tokens, and integrated with OpenAI endpoints for contextual creator discovery.',
+    outcome:
+      'Successfully deployed live to production at lanzy.online with full onboarding flows, responsive creator galleries, and custom profile curation.',
+    keyFeatures: [
+      'Interactive creator profile showcases',
+      'AI-assisted talent recommendation matching',
+      'Instant responsive mobile & desktop UX',
+      'Secure authentication & profile editor',
+    ],
   },
   {
-    title: 'SkillMate AI',
-    description: 'AI-powered career assistant helping students and professionals discover personalized learning paths, skill gap analyses, and curated course recommendations.',
-    image: '/images/project-skillmate.png',
-    techStack: ['React.js', 'OpenAI API', 'Firebase', 'Express.js'],
-    liveUrl: 'https://github.com/hamenath',
-    githubUrl: 'https://github.com/hamenath',
-  },
-  {
-    title: 'Studio GENZ',
-    description: 'A beautiful website for a digital creative studio. Showcases modern portfolios, smooth animations, and high-performance design.',
+    id: 'studiogenz',
+    name: 'Studio GENZ',
+    category: 'Commercial Web Studio',
+    tagline: 'Agency portfolio platform showcasing bespoke web design and custom AI automations for ambitious brands.',
+    role: 'Founder & Lead Developer',
     image: '/images/project-studiogenz.jpeg',
-    techStack: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Node.js'],
+    tech: ['Next.js', 'Tailwind CSS', 'Node.js', 'Framer Motion'],
     liveUrl: 'https://studiogenz.onrender.com/',
     githubUrl: 'https://github.com/hamenath',
+    challenge:
+      'Growing businesses need authoritative digital experiences without bloated agency overhead or slow, clunky WordPress templates that hurt conversion.',
+    approach:
+      'Architected a minimal, high-aesthetic studio website demonstrating modern design systems, fluid motion physics, and clean service pricing structures.',
+    build:
+      'Developed with Next.js and optimized static generation, ensuring near-instant page paints and flawless mobile responsiveness.',
+    outcome:
+      'Currently acts as the primary agency vehicle delivering modern websites and customized automation workflows for clients.',
+    keyFeatures: [
+      'Modern dark-aesthetic layout',
+      'Structured outcome-based service offerings',
+      'Direct client enquiry workflows',
+      'Sub-second page load times',
+    ],
   },
   {
-    title: 'Weatherify',
-    description: 'A clean, minimal weather web app with real-time data, animated weather icons, location detection, and 5-day forecasts — built for everyday use.',
-    image: '/images/project-weatherify.png',
-    techStack: ['React.js', 'OpenWeather API', 'Tailwind CSS'],
-    liveUrl: 'https://weatherify-roan.vercel.app/',
+    id: 'iser',
+    name: 'ISER',
+    category: 'Academic Research Portal',
+    tagline: 'Centralized document submission and peer-review platform built for institutional research workflows.',
+    role: 'Full Stack Developer',
+    image: '/images/project-iser.png',
+    tech: ['Next.js', 'Node.js', 'MongoDB', 'Tailwind CSS', 'REST APIs'],
     githubUrl: 'https://github.com/hamenath',
+    challenge:
+      'Academic departments and research institutions frequently struggle with disorganized email chains and manual spreadsheets to manage paper submissions, reviewer assignments, and revision rounds.',
+    approach:
+      'Designed a role-based research portal that separates author submissions, reviewer feedback loops, and administrative approvals into a clear, unified dashboard.',
+    build:
+      'Implemented robust REST API endpoints in Node.js/Express, a structured MongoDB schema with document versioning, and an intuitive Next.js frontend with clear status indicators.',
+    outcome:
+      'Engineered a complete end-to-end manuscript lifecycle from initial submission to final editorial decision.',
+    keyFeatures: [
+      'Role-based access control (Author, Reviewer, Admin)',
+      'Document revision and submission tracking',
+      'Evaluation rubric and review scorecards',
+      'Clean tabular management dashboard',
+    ],
   },
+  {
+    id: 'skillmate',
+    name: 'SkillMate AI',
+    category: 'AI Application',
+    tagline: 'Intelligent career roadmap planner and technical skill gap advisor powered by OpenAI integrations.',
+    role: 'AI & Full Stack Developer',
+    image: '/images/project-skillmate.png',
+    tech: ['React.js', 'OpenAI API', 'Express.js', 'Firebase'],
+    githubUrl: 'https://github.com/hamenath',
+    challenge:
+      'Students and transitioning developers face an overwhelming flood of tutorials with no personalized guidance on their exact technical shortcomings.',
+    approach:
+      'Created an interactive AI advisor that evaluates user technical proficiency, targets missing competencies, and builds milestone-driven learning roadmaps.',
+    build:
+      'Constructed a lightweight React UI communicating with an Express backend that formats prompt chains and context memory for OpenAI models.',
+    outcome:
+      'Delivered functional interactive roadmap generation that adapts based on user background and targeted job roles.',
+    keyFeatures: [
+      'Personalized skill gap assessment',
+      'Milestone-driven learning curriculum',
+      'Interactive AI career prompt assistant',
+      'Cloud state persistence via Firebase',
+    ],
+  },
+];
+
+const secondaryProjects = [
   {
     title: 'Film Finder',
-    description: 'A movie discovery platform with curated collections, trending titles, smart search, and detailed film metadata powered by the TMDB API.',
+    category: 'Media Discovery',
+    description: 'Movie discovery web application featuring curated collections, real-time search, and deep metadata powered by TMDB API.',
     image: '/images/project-cinescope.png',
-    techStack: ['Next.js', 'TMDB API', 'Tailwind CSS', 'Framer Motion'],
+    tech: ['Next.js', 'TMDB API', 'Tailwind CSS'],
     liveUrl: 'https://flim-finder.vercel.app/',
     githubUrl: 'https://github.com/hamenath',
   },
   {
-    title: 'Password Generator',
-    description: 'A sleek, client-side cryptographic utility to generate highly secure, customizable passwords with live strength metrics and responsive customization panels.',
-    image: '/images/project-password.png',
-    techStack: ['React.js', 'Tailwind CSS', 'Framer Motion'],
-    liveUrl: 'https://password-generator-three-pi-59.vercel.app/',
+    title: 'Weatherify',
+    category: 'Weather Analytics',
+    description: 'Fast, minimal weather utility with location detection, 5-day forecasts, and clean ambient condition visualizations.',
+    image: '/images/project-weatherify.png',
+    tech: ['React.js', 'OpenWeather API', 'Tailwind CSS'],
+    liveUrl: 'https://weatherify-roan.vercel.app/',
     githubUrl: 'https://github.com/hamenath',
   },
   {
     title: 'Expense Tracker',
-    description: 'A personal finance management app with visual budgets, category-based analytics, recurring transactions, and clean monthly summary reports.',
+    category: 'Fintech Utility',
+    description: 'Personal finance dashboard with categorical budget limits, transaction analytics, and monthly spending charts.',
     image: '/images/project-expense.png',
-    techStack: ['React.js', 'Firebase', 'Chart.js', 'Tailwind CSS'],
+    tech: ['React.js', 'Firebase', 'Chart.js'],
     liveUrl: 'https://expense-tracker-bay-mu.vercel.app/',
     githubUrl: 'https://github.com/hamenath',
   },
   {
-    title: 'QR Generator',
-    description: 'A fast, customizable QR code generator with branding options, multiple export formats, and integrated URL shortening for developers and creators.',
-    image: '/images/project-qr.png',
-    techStack: ['React.js', 'QR API', 'Node.js'],
-    liveUrl: 'https://qr-generator-beta-lac.vercel.app/',
+    title: 'Password Generator',
+    category: 'Security Tool',
+    description: 'Client-side cryptographic security utility with entropy scoring, customized rulesets, and instant clipboard exports.',
+    image: '/images/project-password.png',
+    tech: ['React.js', 'Web Crypto API', 'Tailwind CSS'],
+    liveUrl: 'https://password-generator-three-pi-59.vercel.app/',
     githubUrl: 'https://github.com/hamenath',
   },
 ];
 
 export default function Projects() {
-  const scrollToRoadmap = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById('currently-building');
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
+  const [expandedCaseStudy, setExpandedCaseStudy] = useState<string | null>('lanzy');
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+  const toggleCaseStudy = (id: string) => {
+    setExpandedCaseStudy(expandedCaseStudy === id ? null : id);
   };
 
   return (
-    <section id="projects" className="section-padding bg-background border-t border-white/5 relative overflow-hidden">
-      {/* Background glow offsets */}
-      <div className="absolute top-[10%] left-[-15%] w-[40%] h-[40%] rounded-full bg-cyan-500/5 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[10%] right-[-15%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[140px] pointer-events-none" />
-
+    <section id="work" className="section-padding bg-background">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="apple-section-glass p-8 sm:p-12 md:p-16">
-          {/* Header */}
-          <div className="flex flex-col gap-4 mb-12 md:mb-16">
-            <span className="text-xs uppercase font-bold tracking-widest text-blue-400 font-heading">
-              04 / Projects
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div className="max-w-xl">
+            <span className="text-xs uppercase font-semibold tracking-wider text-indigo-400 block mb-2">
+              Portfolio
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading">
-              Featured Projects
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white leading-tight">
+              Selected Work
             </h2>
           </div>
+          <p className="text-slate-400 text-sm sm:text-base max-w-md">
+            Production systems, client solutions, and commercial products engineered with precision, high performance, and human-centered design.
+          </p>
+        </div>
 
-          {/* LANZY - HERO PROJECT */}
-          <div className="mb-16">
-            <div className="relative rounded-3xl apple-crystal overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_40px_rgba(59,130,246,0.05)]">
-              {/* Left/Top Content */}
-              <div className="lg:col-span-6 flex flex-col justify-between gap-6 z-10">
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="px-3.5 py-1 text-[10px] font-bold uppercase tracking-widest bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full">
-                      Hero Project
-                    </span>
-                    <span className="flex items-center gap-1.5 px-3.5 py-1 text-[10px] font-bold uppercase tracking-widest bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 rounded-full">
-                      <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse" />
-                      Currently Building
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-heading">
-                    LANZY
-                  </h3>
-                  
-                  <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-                    Lanzy is a modern freelancer marketplace connecting creative professionals and businesses through AI-powered discovery and premium portfolio experiences.
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {['Next.js', 'Firebase', 'Tailwind CSS', 'Framer Motion', 'OpenAI API'].map((tech, idx) => (
-                      <span key={idx} className="px-3.5 py-1.5 text-xs text-slate-300 apple-badge-crystal">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-4">
-                  <a
-                    href="https://lanzy.online"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="portfolio-pill-btn px-6 py-3 text-sm flex items-center gap-2"
-                  >
-                    <HiExternalLink size={16} />
-                    Live Site
-                  </a>
-                  <a
-                    href="https://github.com/Hamenath/Lanzy-production-1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="portfolio-pill-btn px-6 py-3 text-sm flex items-center gap-2"
-                  >
-                    <FiGithub size={16} />
-                    View Repository
-                  </a>
-                </div>
-              </div>
-
-              {/* Right/Bottom Image Showcase */}
-              <div className="lg:col-span-6 relative aspect-video lg:aspect-auto w-full h-full min-h-62.5 lg:min-h-95 bg-black/40 rounded-2xl overflow-hidden border border-white/5 group shadow-2xl">
-                <Image
-                  src="/images/project-lanzy.png"
-                  alt="Lanzy Platform"
-                  fill
-                  className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-          </div>
-
-          {/* Other Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {otherProjects.map((project, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
+        {/* Featured Case Studies */}
+        <div className="flex flex-col gap-10 mb-16">
+          {featuredCaseStudies.map((project, idx) => {
+            const isExpanded = expandedCaseStudy === project.id;
+            return (
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="group flex flex-col rounded-3xl apple-crystal"
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="enterprise-card overflow-hidden p-6 sm:p-8 md:p-10"
               >
-                {/* Project Image */}
-                <div className="relative w-full h-48 bg-black/40 overflow-hidden border-b border-white/5">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    onError={() => {}}
-                  />
-                </div>
+                {/* Top Header & Visual Split */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  {/* Left Column: Context & Overview */}
+                  <div className="lg:col-span-6 flex flex-col justify-between gap-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="subtle-badge text-indigo-300">
+                          {project.category}
+                        </span>
+                        <span className="text-xs text-slate-500 font-medium">
+                          {project.role}
+                        </span>
+                      </div>
 
-                {/* Content */}
-                <div className="flex flex-col flex-1 p-6 gap-4">
-                  <h3 className="text-lg font-bold text-white font-heading tracking-tight">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-sm text-slate-400 leading-relaxed flex-1">
-                    {project.description}
-                  </p>
+                      <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-3">
+                        {project.name}
+                      </h3>
 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech, tidx) => (
-                      <span
-                        key={tidx}
-                        className="px-2.5 py-1 text-[10px] font-semibold text-slate-300 apple-badge-crystal"
+                      <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                        {project.tagline}
+                      </p>
+
+                      {/* Tech Chips */}
+                      <div className="flex flex-wrap gap-1.5 mb-6">
+                        {project.tech.map((t) => (
+                          <span
+                            key={t}
+                            className="text-xs text-slate-400 bg-white/3 border border-white/6 px-2.5 py-1 rounded-md"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Bar */}
+                    <div className="flex flex-wrap items-center gap-3 pt-2">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary text-xs"
+                        >
+                          <span>Live Demo</span>
+                          <FiExternalLink size={13} />
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-secondary text-xs"
+                        >
+                          <span>Repository</span>
+                          <FiGithub size={13} />
+                        </a>
+                      )}
+                      <button
+                        onClick={() => toggleCaseStudy(project.id)}
+                        className="text-xs font-medium text-slate-400 hover:text-white flex items-center gap-1.5 px-3 py-2 rounded-full border border-white/6 hover:bg-white/4 transition-colors ml-auto cursor-pointer"
+                        aria-expanded={isExpanded}
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        <span>{isExpanded ? 'Hide Case Study' : 'Read Case Study'}</span>
+                        {isExpanded ? <FiChevronUp size={14} /> : <FiChevronDown size={14} />}
+                      </button>
+                    </div>
                   </div>
 
-                  {/* Buttons */}
-                  <div className="flex items-center gap-3 pt-2">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="portfolio-pill-btn px-4 py-2 text-xs flex items-center gap-1.5"
-                    >
-                      <HiExternalLink size={13} />
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="portfolio-pill-btn px-4 py-2 text-xs flex items-center gap-1.5"
-                    >
-                      <FiGithub size={13} />
-                      Repository
-                    </a>
+                  {/* Right Column: Visual Preview */}
+                  <div className="lg:col-span-6 relative aspect-16/10 w-full rounded-xl overflow-hidden bg-[#0c0e15] border border-white/6">
+                    <Image
+                      src={project.image}
+                      alt={`${project.name} interface preview`}
+                      fill
+                      className="object-cover object-top hover:scale-[1.02] transition-transform duration-500 ease-out"
+                      sizes="(max-width: 1024px) 100vw, 550px"
+                    />
                   </div>
                 </div>
-              </motion.div>
+
+                {/* Collapsible Deep Case Study Details */}
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.35, ease: 'easeInOut' }}
+                      className="overflow-hidden border-t border-white/6 mt-8 pt-8"
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                        {/* The Challenge */}
+                        <div className="flex flex-col gap-2">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">
+                            The Challenge
+                          </span>
+                          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            {project.challenge}
+                          </p>
+                        </div>
+
+                        {/* The Approach */}
+                        <div className="flex flex-col gap-2">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                            The Approach
+                          </span>
+                          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            {project.approach}
+                          </p>
+                        </div>
+
+                        {/* The Build & Outcome */}
+                        <div className="flex flex-col gap-2">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
+                            The Build &amp; Outcome
+                          </span>
+                          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            {project.build} {project.outcome}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Key Features Pill Row */}
+                      <div className="mt-6 pt-6 border-t border-white/4 flex flex-wrap items-center gap-2">
+                        <span className="text-xs font-medium text-slate-500 mr-2">Key Highlights:</span>
+                        {project.keyFeatures.map((feat, fIdx) => (
+                          <span
+                            key={fIdx}
+                            className="text-xs text-slate-300 bg-white/4 px-3 py-1 rounded-full border border-white/6"
+                          >
+                            {feat}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        {/* Secondary Projects Grid */}
+        <div className="pt-4 border-t border-white/6">
+          <h3 className="text-base font-semibold text-slate-300 uppercase tracking-wider text-xs mb-6">
+            Additional Products &amp; Utilities
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {secondaryProjects.map((p, pIdx) => (
+              <div
+                key={p.title}
+                className="enterprise-card p-5 flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-black/40 border border-white/6 mb-4">
+                    <Image
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                  </div>
+
+                  <span className="text-[11px] font-medium text-indigo-400 uppercase tracking-wider block mb-1">
+                    {p.category}
+                  </span>
+                  
+                  <h4 className="text-base font-semibold text-white tracking-tight mb-2">
+                    {p.title}
+                  </h4>
+                  
+                  <p className="text-xs text-slate-400 leading-relaxed mb-4">
+                    {p.description}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 pt-3 border-t border-white/4">
+                  {p.liveUrl && (
+                    <a
+                      href={p.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-slate-300 hover:text-white flex items-center gap-1 transition-colors"
+                    >
+                      <span>Live</span>
+                      <FiExternalLink size={12} />
+                    </a>
+                  )}
+                  {p.githubUrl && (
+                    <a
+                      href={p.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
+                    >
+                      <span>Code</span>
+                      <FiGithub size={12} />
+                    </a>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>

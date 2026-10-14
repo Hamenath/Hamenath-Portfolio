@@ -1,28 +1,39 @@
 import Hero from '@/components/Hero';
-import About from '@/components/About';
-import Experience from '@/components/Experience';
-import Skills from '@/components/Skills';
+import TrustBar from '@/components/TrustBar';
+import Services from '@/components/Services';
 import Projects from '@/components/Projects';
-import CurrentlyBuilding from '@/components/CurrentlyBuilding';
-import TechMarquee from '@/components/TechMarquee';
-import Achievements from '@/components/Achievements';
-import Blog from '@/components/Blog';
+import About from '@/components/About';
+import Process from '@/components/Process';
+import Pricing from '@/components/Pricing';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-background text-text-primary min-h-screen">
+      {/* Hero & Credibility */}
       <Hero />
-      <About />
-      <Experience />
-      <Skills />
+      <TrustBar />
+
+      {/* Services: What I Build for Businesses & Startups */}
+      <Services />
+
+      {/* Selected Work & Deep Case Studies */}
       <Projects />
-      <CurrentlyBuilding />
-      <TechMarquee />
-      <Achievements />
-      <Blog />
+
+      {/* Professional About & Verified Background */}
+      <About />
+
+      {/* Structured 5-Step Delivery Process */}
+      <Process />
+
+      {/* Transparent Pricing & Engagement Models */}
+      <Pricing />
+
+      {/* High-Converting Project Enquiry Form & Conversion Hub */}
       <Contact />
+
+      {/* Minimal Footer */}
       <Footer />
     </main>
   );

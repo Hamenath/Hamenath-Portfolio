@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenu, HiX } from 'react-icons/hi';
+import { HiMenuAlt4, HiX } from 'react-icons/hi';
+import { FiArrowUpRight } from 'react-icons/fi';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
+  { name: 'Work', href: '#work' },
+  { name: 'Services', href: '#services' },
   { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'Process', href: '#process' },
+  { name: 'Pricing', href: '#pricing' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -18,30 +20,32 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const offset = 80; // Offset for navbar height
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
 
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.replace('#', '');
+    const element = document.getElementById(id);
+    if (element) {
+      const navOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+        top: elementPosition - navOffset,
+        behavior: 'smooth',
       });
     }
     setIsOpen(false);
@@ -50,52 +54,58 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[92%] max-w-5xl rounded-full border border-white/8 bg-white/3 backdrop-blur-xl ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'py-3 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8),0_0_45px_rgba(59,130,246,0.08)] border-white/12'
-            : 'py-4'
+            ? 'bg-background/85 backdrop-blur-md border-b border-white/6 py-3.5 shadow-xs'
+            : 'bg-transparent py-5'
         }`}
       >
-        <div className="px-6 sm:px-8 flex items-center justify-between">
-          {/* Logo */}
+        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+          {/* Brand Mark */}
           <a
             href="#home"
-            onClick={(e) => handleClick(e, '#home')}
-            className="text-lg font-bold tracking-tight text-white font-heading hover:opacity-75 transition-opacity"
+            onClick={(e) => scrollTo(e, '#home')}
+            className="flex items-center gap-2 group text-white font-heading font-semibold text-base sm:text-lg tracking-tight"
+            aria-label="Hamenath - Back to top"
           >
-            Hamenath B.
+            <span>Hamenath</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 inline-block transition-transform duration-300 group-hover:scale-125" />
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Nav Items */}
+          <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                className="text-sm font-medium text-slate-400 hover:text-white transition-colors duration-200 relative py-1 group"
+                onClick={(e) => scrollTo(e, link.href)}
+                className="text-sm font-medium text-slate-400 hover:text-white transition-colors duration-150 py-1"
               >
                 {link.name}
-                {/* Underline link active glow indicator */}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(228,24,79,0.8)]" />
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={(e) => handleClick(e, '#contact')}
-              className="portfolio-pill-btn text-xs px-5 py-2"
-            >
-              Hire Me
-            </a>
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Right Action CTA */}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href="#contact"
+              onClick={(e) => scrollTo(e, '#contact')}
+              className="btn-primary text-xs tracking-tight"
+            >
+              <span>Start a Project</span>
+              <FiArrowUpRight size={14} />
+            </a>
+          </div>
+
+          {/* Mobile Menu Trigger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-slate-300 hover:text-white transition-colors cursor-pointer"
-            aria-label="Toggle menu"
+            className="md:hidden p-2 text-slate-300 hover:text-white transition-colors focus:outline-none"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
           >
-            {isOpen ? <HiX size={20} /> : <HiMenu size={20} />}
+            {isOpen ? <HiX size={22} /> : <HiMenuAlt4 size={22} />}
           </button>
         </div>
       </header>
@@ -104,30 +114,40 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-6 top-20 z-40 bg-black/90 border border-white/8 backdrop-blur-xl rounded-3xl flex flex-col p-6 shadow-2xl md:hidden"
+            className="fixed inset-x-4 top-20 z-40 bg-surface border border-white/10 rounded-2xl p-6 shadow-2xl md:hidden"
           >
-            <nav className="flex flex-col space-y-6">
+            <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleClick(e, link.href)}
-                  className="text-lg font-medium text-slate-300 hover:text-white transition-colors"
+                  onClick={(e) => scrollTo(e, link.href)}
+                  className="text-base font-medium text-slate-200 hover:text-white transition-colors py-1.5 border-b border-white/4"
                 >
                   {link.name}
                 </a>
               ))}
-              <a
-                href="#contact"
-                onClick={(e) => handleClick(e, '#contact')}
-                className="portfolio-pill-btn w-full text-center text-sm py-3"
-              >
-                Hire Me
-              </a>
+              <div className="pt-2 flex flex-col gap-3">
+                <a
+                  href="#contact"
+                  onClick={(e) => scrollTo(e, '#contact')}
+                  className="btn-primary w-full text-center text-sm py-3"
+                >
+                  Start a Project
+                </a>
+                <a
+                  href="https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-whatsapp w-full text-center text-sm py-3"
+                >
+                  Chat on WhatsApp
+                </a>
+              </div>
             </nav>
           </motion.div>
         )}
