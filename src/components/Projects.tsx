@@ -99,14 +99,14 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Section Heading */}
-        <div className="max-w-2xl mb-14 sm:mb-20">
-          <span className="text-xs uppercase font-semibold tracking-wider text-[#737373] block mb-2">
+        <div className="max-w-2xl mb-14 sm:mb-16 md:mb-20">
+          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-[#737373] block mb-2.5">
             Selected Work
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#171717] leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[#171717] leading-tight">
             Recent Projects
           </h2>
-          <p className="text-[#737373] text-base sm:text-lg mt-3 leading-relaxed">
+          <p className="text-[#737373] text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
             A selection of websites, applications, and digital tools I have designed and engineered.
           </p>
         </div>

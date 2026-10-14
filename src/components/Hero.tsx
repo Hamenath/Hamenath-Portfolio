@@ -88,9 +88,9 @@ export default function Hero() {
         {/* Eyebrow Label */}
         <div
           ref={eyebrowRef}
-          className="mb-3 sm:mb-5"
+          className="mb-5 sm:mb-6"
         >
-          <span className="text-[11px] sm:text-xs uppercase font-medium tracking-[0.16em] text-[#737373]">
+          <span className="text-[11px] sm:text-xs uppercase font-medium tracking-[0.12em] sm:tracking-[0.14em] text-[#737373]">
             INDEPENDENT DEVELOPER · TAMIL NADU, INDIA
           </span>
         </div>
@@ -98,12 +98,12 @@ export default function Hero() {
         {/* Main Headline */}
         <h1
           ref={headlineRef}
-          className="text-3xl sm:text-6xl md:text-7xl lg:text-[5rem] font-semibold tracking-[-0.035em] text-[#171717] leading-[1.12] sm:leading-[1.06] max-w-3xl"
+          className="text-[2.125rem] xs:text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-semibold tracking-[-0.03em] sm:tracking-[-0.035em] text-[#171717] leading-[1.16] sm:leading-[1.08] max-w-[340px] xs:max-w-md sm:max-w-2xl md:max-w-3xl lg:max-w-4xl"
         >
           <span className="block text-[#171717]">
             I turn ideas into
           </span>
-          <span className="block text-[#525252] mt-1 sm:mt-1.5 font-medium">
+          <span className="block text-[#525252] mt-1 sm:mt-2 font-medium">
             thoughtful digital experiences.
           </span>
         </h1>
@@ -111,7 +111,7 @@ export default function Hero() {
         {/* Supporting Description */}
         <p
           ref={copyRef}
-          className="text-[#737373] text-sm sm:text-lg md:text-xl max-w-xl mx-auto mt-4 sm:mt-7 leading-relaxed font-normal"
+          className="text-[#737373] text-base sm:text-lg md:text-[1.125rem] max-w-md sm:max-w-lg md:max-w-xl mx-auto mt-5 sm:mt-6 leading-[1.65] font-normal"
         >
           I build modern websites and AI-powered experiences for businesses, startups, and personal brands.
         </p>
@@ -119,18 +119,18 @@ export default function Hero() {
         {/* Primary and Secondary CTA Buttons */}
         <div
           ref={ctaGroupRef}
-          className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5 mt-6 sm:mt-10"
+          className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 mt-7 sm:mt-9"
         >
           <button
             onClick={() => scrollTo('contact')}
-            className="hero-cta-btn btn-primary text-sm px-5 py-2.5 sm:px-6 sm:py-3 cursor-pointer"
+            className="hero-cta-btn btn-primary text-sm px-6 py-3 cursor-pointer"
           >
             <span>Start a Project</span>
             <FiArrowUpRight size={14} />
           </button>
           <button
             onClick={() => scrollTo('work')}
-            className="hero-cta-btn btn-secondary text-sm px-5 py-2.5 sm:px-6 sm:py-3 cursor-pointer"
+            className="hero-cta-btn btn-secondary text-sm px-6 py-3 cursor-pointer"
           >
             <span>Explore My Work</span>
             <FiArrowDown size={14} className="text-[#737373]" />
@@ -140,7 +140,7 @@ export default function Hero() {
         {/* Small Availability Line with Live Pulse Indicator */}
         <div
           ref={availabilityRef}
-          className="flex items-center justify-center gap-2 mt-5 sm:mt-8 text-xs text-[#737373] font-medium"
+          className="flex items-center justify-center gap-2 mt-5 sm:mt-6 text-xs text-[#737373] font-normal sm:font-medium"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>

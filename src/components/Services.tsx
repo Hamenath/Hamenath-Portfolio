@@ -81,14 +81,14 @@ export default function Services() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Section Heading */}
-        <div className="max-w-xl mb-14 sm:mb-20">
-          <span className="text-xs uppercase font-semibold tracking-wider text-[#737373] block mb-2">
+        <div className="max-w-xl mb-14 sm:mb-16 md:mb-20">
+          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-[#737373] block mb-2.5">
             Services
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#171717] leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[#171717] leading-tight">
             What I Do
           </h2>
-          <p className="text-[#737373] text-base sm:text-lg mt-3 leading-relaxed">
+          <p className="text-[#737373] text-base sm:text-lg mt-3.5 sm:mt-4 leading-relaxed">
             Thoughtful design and clean frontend engineering for businesses, startups, and individuals.
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function Services() {
           {services.map((service) => (
             <div
               key={service.number}
-              className="service-row py-8 sm:py-10 border-b border-[#eaeaea] grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start sm:items-center group"
+              className="service-row py-7 sm:py-9 border-b border-[#eaeaea] grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start sm:items-center group"
             >
               <div className="md:col-span-1">
                 <span className="text-xs font-mono text-[#a3a3a3]">

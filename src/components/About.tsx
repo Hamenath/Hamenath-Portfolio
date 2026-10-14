@@ -59,10 +59,10 @@ export default function About() {
           {/* Left Column: Portrait & Intro */}
           <div ref={leftColRef} className="lg:col-span-5 flex flex-col gap-6">
             <div>
-              <span className="text-xs uppercase font-semibold tracking-wider text-[#737373] block mb-2">
+              <span className="text-xs uppercase font-semibold tracking-[0.14em] text-[#737373] block mb-2.5">
                 About
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#171717] leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[#171717] leading-tight">
                 A Little About Me
               </h2>
             </div>
@@ -82,13 +82,13 @@ export default function About() {
           {/* Right Column: Authentic Story & Highlights */}
           <div ref={rightColRef} className="lg:col-span-7 flex flex-col gap-8 lg:pt-8">
             <div className="flex flex-col gap-4 text-base sm:text-lg text-[#171717] leading-relaxed">
-              <p className="font-medium text-xl sm:text-2xl text-[#171717]">
+              <p className="font-medium text-xl sm:text-2xl text-[#171717] leading-snug tracking-tight">
                 I&apos;m Hamenath, a developer focused on building thoughtful websites and useful digital experiences.
               </p>
-              <p className="text-[#737373] text-sm sm:text-base">
+              <p className="text-[#737373] text-sm sm:text-base leading-[1.65]">
                 I help business owners, startups, and founders translate their goals into clean, well-engineered web products. My approach is rooted in simplicity: clear communication, fast mobile loading, and interfaces that feel effortless to navigate.
               </p>
-              <p className="text-[#737373] text-sm sm:text-base">
+              <p className="text-[#737373] text-sm sm:text-base leading-[1.65]">
                 Whether you need a new website to establish credibility or want to modernize an existing platform, I work directly with you from concept to launch.
               </p>
             </div>
