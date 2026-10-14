@@ -2,8 +2,13 @@
 
 import { useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { FiArrowUpRight, FiArrowDown } from 'react-icons/fi';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
@@ -17,7 +22,12 @@ export default function Hero() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      onComplete: () => {
+        ScrollTrigger.refresh();
+      },
+    });
 
     // 1. Eyebrow fades in
     tl.fromTo(
@@ -71,14 +81,14 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-[88vh] sm:min-h-[90vh] flex items-center justify-center pt-32 sm:pt-36 md:pt-40 pb-20 sm:pb-24 px-6 bg-white overflow-hidden"
+      className="relative hero-viewport-mobile flex flex-col justify-center items-center pt-20 pb-8 sm:pt-28 sm:pb-12 md:pt-40 md:pb-24 px-6 bg-white overflow-hidden"
     >
-      <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+      <div className="w-full max-w-4xl mx-auto text-center flex flex-col items-center my-auto">
         
         {/* Eyebrow Label */}
         <div
           ref={eyebrowRef}
-          className="mb-4 sm:mb-5"
+          className="mb-3 sm:mb-5"
         >
           <span className="text-[11px] sm:text-xs uppercase font-medium tracking-[0.16em] text-[#737373]">
             INDEPENDENT DEVELOPER · TAMIL NADU, INDIA
@@ -88,7 +98,7 @@ export default function Hero() {
         {/* Main Headline */}
         <h1
           ref={headlineRef}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-semibold tracking-[-0.035em] text-[#171717] leading-[1.1] sm:leading-[1.06] max-w-3xl"
+          className="text-3xl sm:text-6xl md:text-7xl lg:text-[5rem] font-semibold tracking-[-0.035em] text-[#171717] leading-[1.12] sm:leading-[1.06] max-w-3xl"
         >
           <span className="block text-[#171717]">
             I turn ideas into
@@ -101,7 +111,7 @@ export default function Hero() {
         {/* Supporting Description */}
         <p
           ref={copyRef}
-          className="text-[#737373] text-base sm:text-lg md:text-xl max-w-xl mx-auto mt-6 sm:mt-7 leading-relaxed font-normal"
+          className="text-[#737373] text-sm sm:text-lg md:text-xl max-w-xl mx-auto mt-4 sm:mt-7 leading-relaxed font-normal"
         >
           I build modern websites and AI-powered experiences for businesses, startups, and personal brands.
         </p>
@@ -109,18 +119,18 @@ export default function Hero() {
         {/* Primary and Secondary CTA Buttons */}
         <div
           ref={ctaGroupRef}
-          className="flex flex-wrap items-center justify-center gap-3.5 mt-8 sm:mt-10"
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-3.5 mt-6 sm:mt-10"
         >
           <button
             onClick={() => scrollTo('contact')}
-            className="hero-cta-btn btn-primary text-sm px-6 py-3 cursor-pointer"
+            className="hero-cta-btn btn-primary text-sm px-5 py-2.5 sm:px-6 sm:py-3 cursor-pointer"
           >
             <span>Start a Project</span>
             <FiArrowUpRight size={14} />
           </button>
           <button
             onClick={() => scrollTo('work')}
-            className="hero-cta-btn btn-secondary text-sm px-6 py-3 cursor-pointer"
+            className="hero-cta-btn btn-secondary text-sm px-5 py-2.5 sm:px-6 sm:py-3 cursor-pointer"
           >
             <span>Explore My Work</span>
             <FiArrowDown size={14} className="text-[#737373]" />
@@ -130,7 +140,7 @@ export default function Hero() {
         {/* Small Availability Line with Live Pulse Indicator */}
         <div
           ref={availabilityRef}
-          className="flex items-center justify-center gap-2 mt-7 sm:mt-8 text-xs text-[#737373] font-medium"
+          className="flex items-center justify-center gap-2 mt-5 sm:mt-8 text-xs text-[#737373] font-medium"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>

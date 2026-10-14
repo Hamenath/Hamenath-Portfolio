@@ -108,6 +108,19 @@ html.lenis body {
   }
 }
 
+/* Mobile Full-Viewport Hero */
+.hero-viewport-mobile {
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .hero-viewport-mobile {
+    min-height: 90vh;
+  }
+}
+
 /* Apple-inspired Minimal Buttons */
 .btn-primary {
   display: inline-flex;
