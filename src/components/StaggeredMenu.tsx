@@ -99,7 +99,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll on mobile when menu is open
+  // Lock body scroll when menu is open
   useEffect(() => {
     if (open) {
       const originalOverflow = document.body.style.overflow;
@@ -173,10 +173,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const layerStates = layers.map(el => ({ el, start: offscreen }));
     const panelStart = offscreen;
 
-    gsap.set(panel, { opacity: 1 });
-    if (preLayersRef.current) gsap.set(preLayersRef.current, { opacity: 1 });
-    if (layers.length) gsap.set(layers, { opacity: 1 });
-
     if (itemEls.length) {
       gsap.set(itemEls, { yPercent: 140, rotate: 10 });
     }
@@ -216,9 +212,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         {
           yPercent: 0,
           rotate: 0,
-          duration: 0.9,
+          duration: 1,
           ease: 'power4.out',
-          stagger: { each: 0.08, from: 'start' }
+          stagger: { each: 0.1, from: 'start' }
         },
         itemsStart
       );
@@ -287,9 +283,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [position]);
 
   const playOpen = useCallback(() => {
+    if (busyRef.current) return;
+    busyRef.current = true;
     const tl = buildOpenTimeline();
     if (tl) {
+      tl.eventCallback('onComplete', () => {
+        busyRef.current = false;
+      });
       tl.play(0);
+    } else {
+      busyRef.current = false;
     }
   }, [buildOpenTimeline]);
 
@@ -304,6 +307,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       const preContainer = preLayersRef.current;
       if (preContainer) {
         layers = Array.from(preContainer.querySelectorAll<HTMLElement>('.sm-prelayer'));
+        preLayerElsRef.current = layers;
       } else {
         layers = [];
       }
@@ -333,6 +337,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
         if (extraEls.length) gsap.set(extraEls, { y: 20, opacity: 0 });
+        busyRef.current = false;
       }
     });
   }, [position]);
@@ -502,7 +507,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         })()}
       </div>
 
-      {/* Fixed Navigation Header */}
+      {/* Navigation Header */}
       <header
         className={`staggered-menu-header ${scrolled ? 'header-scrolled' : ''}`}
         aria-label="Main navigation header"
@@ -593,7 +598,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             )}
           </ul>
 
-          {/* Optional Extra Mobile Action Buttons */}
+          {/* Optional Extra Action Buttons */}
           {extraContent && (
             <div className="sm-panel-extra" onClick={closeMenu}>
               {extraContent}

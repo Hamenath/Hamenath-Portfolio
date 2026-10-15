@@ -21,13 +21,13 @@
 .sm-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
-  z-index: 8;
+  z-index: 5;
 }
 
 .staggered-menu-wrapper[data-open] .sm-backdrop {
@@ -37,7 +37,7 @@
 
 /* Main Navigation Header */
 .staggered-menu-header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -47,7 +47,7 @@
   padding: 1.25rem 1.5rem;
   background: transparent;
   pointer-events: none;
-  z-index: 70;
+  z-index: 25;
   transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -66,7 +66,7 @@
 
 .sm-header-inner {
   width: 100%;
-  max-width: 72rem; /* matches max-w-6xl */
+  max-width: 72rem;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -200,15 +200,14 @@
 
 /* Staggered Prelayer Ribbons */
 .sm-prelayers {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
-  width: clamp(340px, 34vw, 460px);
-  height: 100%;
+  width: clamp(320px, 36vw, 460px);
   pointer-events: none;
-  z-index: 64;
-  opacity: 1;
+  z-index: 10;
+  opacity: 0;
 }
 
 [data-position='left'] .sm-prelayers {
@@ -222,41 +221,39 @@
   right: 0;
   height: 100%;
   width: 100%;
-  transform: translateX(100%);
-  opacity: 1;
+  transform: translateX(0);
+  opacity: 0;
 }
 
 [data-position='left'] .sm-prelayer {
   right: auto;
   left: 0;
-  transform: translateX(-100%);
 }
 
 /* Main Staggered Drawer Panel */
 .staggered-menu-panel {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
-  width: clamp(340px, 34vw, 460px);
+  width: clamp(320px, 36vw, 460px);
   height: 100%;
-  height: 100svh;
   background: #ffffff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   padding: 6.5rem 2.25rem 2.25rem 2.25rem;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  z-index: 66;
+  z-index: 15;
   pointer-events: auto;
-  transform: translateX(100%);
-  opacity: 1;
+  opacity: 0;
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
 }
 
 [data-position='left'] .staggered-menu-panel {
   right: auto;
   left: 0;
-  transform: translateX(-100%);
   box-shadow: 10px 0 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -339,7 +336,7 @@
   color: var(--sm-accent, #171717);
 }
 
-/* Extra Mobile Action Buttons */
+/* Extra Action Buttons */
 .sm-panel-extra {
   display: flex;
   flex-direction: column;
