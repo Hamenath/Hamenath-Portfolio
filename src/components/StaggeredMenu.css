@@ -208,7 +208,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 64;
-  opacity: 0;
+  opacity: 1;
 }
 
 [data-position='left'] .sm-prelayers {
@@ -222,13 +222,14 @@
   right: 0;
   height: 100%;
   width: 100%;
-  transform: translateX(0);
-  opacity: 0;
+  transform: translateX(100%);
+  opacity: 1;
 }
 
 [data-position='left'] .sm-prelayer {
   right: auto;
   left: 0;
+  transform: translateX(-100%);
 }
 
 /* Main Staggered Drawer Panel */
@@ -247,13 +248,15 @@
   -webkit-overflow-scrolling: touch;
   z-index: 66;
   pointer-events: auto;
-  opacity: 0;
+  transform: translateX(100%);
+  opacity: 1;
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
 }
 
 [data-position='left'] .staggered-menu-panel {
   right: auto;
   left: 0;
+  transform: translateX(-100%);
   box-shadow: 10px 0 30px rgba(0, 0, 0, 0.08);
 }
 

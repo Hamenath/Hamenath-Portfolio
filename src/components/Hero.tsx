@@ -109,7 +109,7 @@ export default function Hero() {
       const navOffset = 80;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
-        top: elementPosition - navOffset,
+        top: Math.max(0, elementPosition - navOffset),
         behavior: 'smooth',
       });
     }
@@ -119,7 +119,7 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-[100vh] min-h-[100svh] flex flex-col justify-center items-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-24 lg:pb-12 px-6 sm:px-8 bg-white overflow-hidden"
+      className="relative min-h-screen min-h-svh flex flex-col justify-center items-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-24 lg:pb-12 px-6 sm:px-8 bg-white overflow-hidden"
     >
       <div className="w-full max-w-6xl mx-auto my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
@@ -145,7 +145,7 @@ export default function Hero() {
             {/* Professional Descriptor */}
             <div ref={descriptorRef} className="mt-3 sm:mt-4">
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-[#525252] tracking-tight">
-                Web Developer · UI Enthusiast · AI Builder
+                Web Developer · AI Builder
               </p>
             </div>
 
@@ -163,6 +163,7 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-3.5 sm:gap-4 mt-7 sm:mt-8 w-full sm:w-auto"
             >
               <button
+                type="button"
                 onClick={() => scrollTo('contact')}
                 className="hero-cta-btn btn-primary text-sm px-6 py-3 cursor-pointer group flex-1 sm:flex-initial"
               >
@@ -170,6 +171,7 @@ export default function Hero() {
                 <FiArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
               <button
+                type="button"
                 onClick={() => scrollTo('work')}
                 className="hero-cta-btn btn-secondary text-sm px-6 py-3 cursor-pointer group flex-1 sm:flex-initial"
               >
@@ -215,26 +217,20 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Column — Professional Portrait */}
+          {/* Right Column — Professional Portrait (Open, no card, no shadows) */}
           <div
             ref={portraitRef}
-            className="lg:col-span-5 w-full flex items-center justify-center lg:justify-end order-2 mt-4 lg:mt-0"
+            className="lg:col-span-5 w-full flex items-center lg:items-center justify-center lg:justify-end order-2 mt-6 lg:mt-0"
           >
-            <div className="relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-[400px] lg:max-w-[440px] xl:max-w-[460px] aspect-[4/5] rounded-3xl bg-[#f7f7f7] border border-border overflow-hidden shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06)] group">
-              {/* Soft ambient light gradient behind subject */}
-              <div
-                className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-[#f7f7f7] to-[#eeeeee] pointer-events-none"
-                aria-hidden="true"
-              />
-              
-              {/* Actual professional portrait */}
+            <div className="relative w-full max-w-80 sm:max-w-100 md:max-w-110 lg:max-w-120 xl:max-w-130 flex justify-center lg:justify-end">
               <Image
                 src="/images/profile.jpeg"
-                alt="Hamenath - Web Developer, UI Enthusiast & AI Builder"
-                fill
+                alt="Hamenath - Web Developer & AI Builder"
+                width={1500}
+                height={1500}
                 priority
-                sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 460px"
-                className="object-cover object-top filter contrast-[1.02] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                sizes="(max-width: 640px) 320px, (max-width: 1024px) 440px, 520px"
+                className="w-full h-auto object-contain select-none pointer-events-none filter contrast-[1.02]"
               />
             </div>
           </div>

@@ -18,10 +18,12 @@ export default function Navbar() {
     if (element) {
       const navOffset = 80;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - navOffset,
-        behavior: 'smooth',
-      });
+      setTimeout(() => {
+        window.scrollTo({
+          top: Math.max(0, elementPosition - navOffset),
+          behavior: 'smooth',
+        });
+      }, 50);
     }
   };
 

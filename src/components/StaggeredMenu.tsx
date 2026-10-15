@@ -143,8 +143,18 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
   const buildOpenTimeline = useCallback(() => {
     const panel = panelRef.current;
-    const layers = preLayerElsRef.current;
     if (!panel) return null;
+
+    let layers = preLayerElsRef.current;
+    if (!layers || layers.length === 0) {
+      const preContainer = preLayersRef.current;
+      if (preContainer) {
+        layers = Array.from(preContainer.querySelectorAll<HTMLElement>('.sm-prelayer'));
+        preLayerElsRef.current = layers;
+      } else {
+        layers = [];
+      }
+    }
 
     openTlRef.current?.kill();
     if (closeTweenRef.current) {
@@ -162,6 +172,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const offscreen = position === 'left' ? -100 : 100;
     const layerStates = layers.map(el => ({ el, start: offscreen }));
     const panelStart = offscreen;
+
+    gsap.set(panel, { opacity: 1 });
+    if (preLayersRef.current) gsap.set(preLayersRef.current, { opacity: 1 });
+    if (layers.length) gsap.set(layers, { opacity: 1 });
 
     if (itemEls.length) {
       gsap.set(itemEls, { yPercent: 140, rotate: 10 });
@@ -273,16 +287,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [position]);
 
   const playOpen = useCallback(() => {
-    if (busyRef.current) return;
-    busyRef.current = true;
     const tl = buildOpenTimeline();
     if (tl) {
-      tl.eventCallback('onComplete', () => {
-        busyRef.current = false;
-      });
       tl.play(0);
-    } else {
-      busyRef.current = false;
     }
   }, [buildOpenTimeline]);
 
@@ -292,7 +299,15 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     itemEntranceTweenRef.current?.kill();
 
     const panel = panelRef.current;
-    const layers = preLayerElsRef.current;
+    let layers = preLayerElsRef.current;
+    if (!layers || layers.length === 0) {
+      const preContainer = preLayersRef.current;
+      if (preContainer) {
+        layers = Array.from(preContainer.querySelectorAll<HTMLElement>('.sm-prelayer'));
+      } else {
+        layers = [];
+      }
+    }
     if (!panel) return;
 
     const all = [...layers, panel];
@@ -318,7 +333,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
         if (extraEls.length) gsap.set(extraEls, { y: 20, opacity: 0 });
-        busyRef.current = false;
       }
     });
   }, [position]);
@@ -413,6 +427,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (openRef.current) {
       openRef.current = false;
       setOpen(false);
+      document.body.style.overflow = '';
       onMenuClose?.();
       playClose();
       animateIcon(false);
@@ -454,11 +469,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [closeMenu]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, item: StaggeredMenuItem) => {
-    if (item.onClick) {
-      item.onClick(e);
-    }
-    onItemClick?.(e, item);
     closeMenu();
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (item.onClick) {
+        item.onClick(e);
+      }
+      onItemClick?.(e, item);
+    }, 20);
   };
 
   return (
