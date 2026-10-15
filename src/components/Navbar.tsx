@@ -1,15 +1,7 @@
 'use client';
 
 import React from 'react';
-import { FiArrowUpRight } from 'react-icons/fi';
 import StaggeredMenu, { StaggeredMenuItem, StaggeredMenuSocialItem } from './StaggeredMenu';
-
-const navLinks = [
-  { name: 'Work', href: '#work' },
-  { name: 'Services', href: '#services' },
-  { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
-];
 
 const socialItems: StaggeredMenuSocialItem[] = [
   { label: 'GitHub', link: 'https://github.com/Hamenath' },
@@ -62,30 +54,6 @@ export default function Navbar() {
         >
           Hamenath
         </a>
-      }
-      headerCenter={
-        <div className="hidden md:flex items-center gap-8">
-          <nav className="flex items-center gap-7" aria-label="Main Navigation">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => scrollTo(e, link.href)}
-                className="text-sm font-medium text-text-secondary hover:text-[#171717] transition-colors duration-150 py-1"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="#contact"
-            onClick={(e) => scrollTo(e, '#contact')}
-            className="btn-primary text-xs"
-          >
-            <span>Start a Project</span>
-            <FiArrowUpRight size={13} />
-          </a>
-        </div>
       }
       extraContent={
         <div className="flex flex-col gap-3 pt-2">

@@ -39,6 +39,7 @@ export interface StaggeredMenuProps {
   onMenuClose?: () => void;
   onItemClick?: (e: React.MouseEvent<HTMLAnchorElement>, item: StaggeredMenuItem) => void;
   headerCenter?: React.ReactNode;
+  headerActions?: React.ReactNode;
   extraContent?: React.ReactNode;
 }
 
@@ -63,6 +64,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   onMenuClose,
   onItemClick,
   headerCenter,
+  headerActions,
   extraContent,
 }) => {
   const [open, setOpen] = useState(false);
@@ -513,6 +515,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           )}
 
           <div className="sm-header-actions">
+            {headerActions}
             <button
               ref={toggleBtnRef}
               className="sm-toggle"
