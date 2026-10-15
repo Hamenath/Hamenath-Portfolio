@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './StaggeredMenu.css';
+import { pauseScroll, resumeScroll } from '@/lib/lenis';
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -99,13 +100,15 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when menu is open
+  // Lock body scroll and pause smooth scroll when menu is open
   useEffect(() => {
     if (open) {
+      pauseScroll();
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = originalOverflow;
+        resumeScroll();
       };
     }
   }, [open]);
@@ -174,7 +177,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const panelStart = offscreen;
 
     if (itemEls.length) {
-      gsap.set(itemEls, { yPercent: 140, rotate: 10 });
+      gsap.set(itemEls, { yPercent: 125, rotate: 6 });
     }
     if (numberEls.length) {
       gsap.set(numberEls, { '--sm-num-opacity': 0 });
@@ -192,11 +195,11 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const tl = gsap.timeline({ paused: true });
 
     layerStates.forEach((ls, i) => {
-      tl.fromTo(ls.el, { xPercent: ls.start }, { xPercent: 0, duration: 0.5, ease: 'power4.out' }, i * 0.07);
+      tl.fromTo(ls.el, { xPercent: ls.start }, { xPercent: 0, duration: 0.55, ease: 'power4.out' }, i * 0.06);
     });
-    const lastTime = layerStates.length ? (layerStates.length - 1) * 0.07 : 0;
-    const panelInsertTime = lastTime + (layerStates.length ? 0.08 : 0);
-    const panelDuration = 0.65;
+    const lastTime = layerStates.length ? (layerStates.length - 1) * 0.06 : 0;
+    const panelInsertTime = lastTime + (layerStates.length ? 0.07 : 0);
+    const panelDuration = 0.72;
     tl.fromTo(
       panel,
       { xPercent: panelStart },
@@ -205,16 +208,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     );
 
     if (itemEls.length) {
-      const itemsStartRatio = 0.15;
+      const itemsStartRatio = 0.18;
       const itemsStart = panelInsertTime + panelDuration * itemsStartRatio;
       tl.to(
         itemEls,
         {
           yPercent: 0,
           rotate: 0,
-          duration: 1,
+          duration: 0.85,
           ease: 'power4.out',
-          stagger: { each: 0.1, from: 'start' }
+          stagger: { each: 0.07, from: 'start' }
         },
         itemsStart
       );
@@ -222,24 +225,24 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         tl.to(
           numberEls,
           {
-            duration: 0.6,
+            duration: 0.65,
             ease: 'power2.out',
             '--sm-num-opacity': 1,
-            stagger: { each: 0.08, from: 'start' }
+            stagger: { each: 0.07, from: 'start' }
           },
-          itemsStart + 0.1
+          itemsStart + 0.08
         );
       }
     }
 
     if (extraEls.length) {
-      const extraStart = panelInsertTime + panelDuration * 0.35;
+      const extraStart = panelInsertTime + panelDuration * 0.32;
       tl.to(
         extraEls,
         {
           y: 0,
           opacity: 1,
-          duration: 0.5,
+          duration: 0.55,
           ease: 'power3.out',
           stagger: { each: 0.08, from: 'start' }
         },
@@ -248,7 +251,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }
 
     if (socialTitle || socialLinks.length) {
-      const socialsStart = panelInsertTime + panelDuration * 0.4;
+      const socialsStart = panelInsertTime + panelDuration * 0.38;
       if (socialTitle) {
         tl.to(
           socialTitle,
@@ -268,7 +271,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             opacity: 1,
             duration: 0.55,
             ease: 'power3.out',
-            stagger: { each: 0.08, from: 'start' },
+            stagger: { each: 0.07, from: 'start' },
             onComplete: () => {
               gsap.set(socialLinks, { clearProps: 'opacity' });
             }
@@ -319,13 +322,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const offscreen = position === 'left' ? -100 : 100;
     closeTweenRef.current = gsap.to(all, {
       xPercent: offscreen,
-      duration: 0.32,
-      ease: 'power3.in',
+      duration: 0.38,
+      ease: 'power3.inOut',
       overwrite: 'auto',
       onComplete: () => {
         const itemEls = Array.from(panel.querySelectorAll<HTMLElement>('.sm-panel-itemLabel'));
         if (itemEls.length) {
-          gsap.set(itemEls, { yPercent: 140, rotate: 10 });
+          gsap.set(itemEls, { yPercent: 125, rotate: 6 });
         }
         const numberEls = Array.from(panel.querySelectorAll<HTMLElement>('.sm-panel-list[data-numbering] .sm-panel-item'));
         if (numberEls.length) {
@@ -338,6 +341,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
         if (extraEls.length) gsap.set(extraEls, { y: 20, opacity: 0 });
         busyRef.current = false;
+        resumeScroll();
       }
     });
   }, [position]);
@@ -347,9 +351,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (!icon) return;
     spinTweenRef.current?.kill();
     if (opening) {
-      spinTweenRef.current = gsap.to(icon, { rotate: 225, duration: 0.8, ease: 'power4.out', overwrite: 'auto' });
+      spinTweenRef.current = gsap.to(icon, { rotate: 225, duration: 0.7, ease: 'power4.out', overwrite: 'auto' });
     } else {
-      spinTweenRef.current = gsap.to(icon, { rotate: 0, duration: 0.35, ease: 'power3.inOut', overwrite: 'auto' });
+      spinTweenRef.current = gsap.to(icon, { rotate: 0, duration: 0.38, ease: 'power3.inOut', overwrite: 'auto' });
     }
   }, []);
 
@@ -362,8 +366,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const targetColor = opening ? openMenuButtonColor : menuButtonColor;
         colorTweenRef.current = gsap.to(btn, {
           color: targetColor,
-          delay: 0.18,
-          duration: 0.3,
+          delay: 0.15,
+          duration: 0.35,
           ease: 'power2.out'
         });
       } else {
@@ -433,6 +437,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       openRef.current = false;
       setOpen(false);
       document.body.style.overflow = '';
+      resumeScroll();
       onMenuClose?.();
       playClose();
       animateIcon(false);

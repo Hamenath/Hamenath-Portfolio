@@ -5,6 +5,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { FiArrowUpRight, FiArrowDown, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { scrollToSection } from '@/lib/lenis';
 
 const socialLinks = [
   {
@@ -104,15 +105,7 @@ export default function Hero() {
   }, { scope: containerRef });
 
   const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const navOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: Math.max(0, elementPosition - navOffset),
-        behavior: 'smooth',
-      });
-    }
+    scrollToSection(id);
   };
 
   return (

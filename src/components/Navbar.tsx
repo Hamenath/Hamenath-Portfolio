@@ -2,6 +2,7 @@
 
 import React from 'react';
 import StaggeredMenu, { StaggeredMenuItem, StaggeredMenuSocialItem } from './StaggeredMenu';
+import { scrollToSection } from '@/lib/lenis';
 
 const socialItems: StaggeredMenuSocialItem[] = [
   { label: 'GitHub', link: 'https://github.com/Hamenath' },
@@ -13,18 +14,7 @@ const socialItems: StaggeredMenuSocialItem[] = [
 export default function Navbar() {
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const id = href.replace('#', '');
-    const element = document.getElementById(id);
-    if (element) {
-      const navOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      setTimeout(() => {
-        window.scrollTo({
-          top: Math.max(0, elementPosition - navOffset),
-          behavior: 'smooth',
-        });
-      }, 50);
-    }
+    scrollToSection(href);
   };
 
   const menuItems: StaggeredMenuItem[] = [
@@ -62,7 +52,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => scrollTo(e, '#contact')}
-            className="btn-primary w-full text-center text-sm py-3"
+            className="btn-primary w-full text-center text-sm py-3 justify-center shadow-xs hover:shadow-md"
           >
             Start a Project
           </a>
@@ -70,7 +60,7 @@ export default function Navbar() {
             href="https://wa.me/918778707086?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-whatsapp w-full text-center text-sm py-3"
+            className="btn-whatsapp w-full text-center text-sm py-3 justify-center shadow-xs hover:shadow-md"
           >
             Chat on WhatsApp
           </a>

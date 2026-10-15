@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { FiArrowUpRight } from 'react-icons/fi';
+import { scrollToSection } from '@/lib/lenis';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -64,16 +65,8 @@ export default function Services() {
   }, { scope: sectionRef });
 
   const selectService = (type: string) => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      const navOffset = 80;
-      const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - navOffset,
-        behavior: 'smooth',
-      });
-      window.dispatchEvent(new CustomEvent('select-project-type', { detail: type }));
-    }
+    scrollToSection('contact');
+    window.dispatchEvent(new CustomEvent('select-project-type', { detail: type }));
   };
 
   return (
