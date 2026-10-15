@@ -1,22 +1,42 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { FiArrowUpRight, FiArrowDown } from 'react-icons/fi';
+import { FiArrowUpRight, FiArrowDown, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+const socialLinks = [
+  {
+    name: 'GitHub',
+    url: 'https://github.com/Hamenath',
+    icon: FiGithub,
+    label: 'Visit Hamenath’s GitHub profile',
+  },
+  {
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/hamenathbdesigner',
+    icon: FiLinkedin,
+    label: 'Connect with Hamenath on LinkedIn',
+  },
+  {
+    name: 'Email',
+    url: 'mailto:hamenathmurali@gmail.com',
+    icon: FiMail,
+    label: 'Send an email to Hamenath',
+  },
+];
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const copyRef = useRef<HTMLParagraphElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const descriptorRef = useRef<HTMLDivElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
   const ctaGroupRef = useRef<HTMLDivElement>(null);
+  const socialsRef = useRef<HTMLDivElement>(null);
   const availabilityRef = useRef<HTMLDivElement>(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -24,44 +44,62 @@ export default function Hero() {
 
     const tl = gsap.timeline({
       defaults: { ease: 'power3.out' },
-      onComplete: () => {
-        ScrollTrigger.refresh();
-      },
     });
 
     // 1. Eyebrow fades in
     tl.fromTo(
       eyebrowRef.current,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.5 }
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.5, delay: 0.1 }
     )
-      // 2. Headline reveals with subtle upward movement
+      // 2. Main heading reveals with subtle vertical movement
       .fromTo(
-        headlineRef.current,
-        { opacity: 0, y: 20 },
+        headingRef.current,
+        { opacity: 0, y: 22 },
         { opacity: 1, y: 0, duration: 0.65 },
         '-=0.3'
       )
-      // 3. Supporting text fades in
+      // 3. Professional descriptor appears
       .fromTo(
-        copyRef.current,
+        descriptorRef.current,
         { opacity: 0, y: 14 },
         { opacity: 1, y: 0, duration: 0.55 },
         '-=0.4'
       )
-      // 4. CTA buttons appear with a small stagger
+      // 4. Short description appears smoothly
+      .fromTo(
+        descriptionRef.current,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.55 },
+        '-=0.4'
+      )
+      // 5. CTA buttons reveal with a short stagger
       .fromTo(
         '.hero-cta-btn',
         { opacity: 0, y: 12 },
         { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 },
         '-=0.35'
       )
-      // 5. Availability text appears subtly
+      // 6. Social links appear with subtle pop
+      .fromTo(
+        '.hero-social-link',
+        { opacity: 0, y: 10, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, stagger: 0.06 },
+        '-=0.3'
+      )
+      // 7. Availability line appears
       .fromTo(
         availabilityRef.current,
         { opacity: 0, y: 8 },
         { opacity: 1, y: 0, duration: 0.45 },
         '-=0.25'
+      )
+      // 8. Portrait fades in with subtle scale transition
+      .fromTo(
+        portraitRef.current,
+        { opacity: 0, y: 20, scale: 0.98 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'power2.out' },
+        '-=0.65'
       );
   }, { scope: containerRef });
 
@@ -81,74 +119,127 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative hero-viewport-mobile flex flex-col justify-center items-center pt-20 pb-8 sm:pt-28 sm:pb-12 md:pt-40 md:pb-24 px-6 bg-white overflow-hidden"
+      className="relative min-h-[100vh] min-h-[100svh] flex flex-col justify-center items-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-24 lg:pb-12 px-6 sm:px-8 bg-white overflow-hidden"
     >
-      <div className="w-full max-w-4xl mx-auto text-center flex flex-col items-center my-auto">
-        
-        {/* Eyebrow Label */}
-        <div
-          ref={eyebrowRef}
-          className="mb-5 sm:mb-6"
-        >
-          <span className="text-[11px] sm:text-xs uppercase font-medium tracking-[0.12em] sm:tracking-[0.14em] text-text-secondary">
-            INDEPENDENT DEVELOPER · TAMIL NADU, INDIA
-          </span>
-        </div>
+      <div className="w-full max-w-6xl mx-auto my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
+          
+          {/* Left Column — Personal Introduction */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left justify-center order-1">
+            
+            {/* Eyebrow */}
+            <div ref={eyebrowRef} className="mb-3 sm:mb-4">
+              <span className="text-[11px] sm:text-xs uppercase font-semibold tracking-[0.16em] text-text-secondary inline-block">
+                HELLO, I&apos;M HAMENATH
+              </span>
+            </div>
 
-        {/* Main Headline */}
-        <h1
-          ref={headlineRef}
-          className="text-[2.125rem] xs:text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-semibold tracking-[-0.03em] sm:tracking-[-0.035em] text-[#171717] leading-[1.16] sm:leading-[1.08] max-w-85 xs:max-w-md sm:max-w-2xl md:max-w-3xl lg:max-w-4xl"
-        >
-          <span className="block text-[#171717]">
-            I turn ideas into
-          </span>
-          <span className="block text-[#525252] mt-1 sm:mt-2 font-medium">
-            thoughtful digital experiences.
-          </span>
-        </h1>
+            {/* Main Heading */}
+            <h1
+              ref={headingRef}
+              className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] tracking-[-0.035em] text-[#171717] leading-[1.04]"
+            >
+              Hamenath
+            </h1>
 
-        {/* Supporting Description */}
-        <p
-          ref={copyRef}
-          className="text-text-secondary text-base sm:text-lg md:text-[1.125rem] max-w-md sm:max-w-lg md:max-w-xl mx-auto mt-5 sm:mt-6 leading-[1.65] font-normal"
-        >
-          I build modern websites and AI-powered experiences for businesses, startups, and personal brands.
-        </p>
+            {/* Professional Descriptor */}
+            <div ref={descriptorRef} className="mt-3 sm:mt-4">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-[#525252] tracking-tight">
+                Web Developer · UI Enthusiast · AI Builder
+              </p>
+            </div>
 
-        {/* Primary and Secondary CTA Buttons */}
-        <div
-          ref={ctaGroupRef}
-          className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 mt-7 sm:mt-9"
-        >
-          <button
-            onClick={() => scrollTo('contact')}
-            className="hero-cta-btn btn-primary text-sm px-6 py-3 cursor-pointer"
+            {/* Short Description */}
+            <p
+              ref={descriptionRef}
+              className="text-text-secondary text-sm sm:text-base md:text-lg leading-[1.65] max-w-xl mt-4 sm:mt-5 font-normal"
+            >
+              I build thoughtful websites and useful digital experiences for businesses, startups, and personal brands.
+            </p>
+
+            {/* Primary & Secondary CTA Buttons */}
+            <div
+              ref={ctaGroupRef}
+              className="flex flex-wrap items-center gap-3.5 sm:gap-4 mt-7 sm:mt-8 w-full sm:w-auto"
+            >
+              <button
+                onClick={() => scrollTo('contact')}
+                className="hero-cta-btn btn-primary text-sm px-6 py-3 cursor-pointer group flex-1 sm:flex-initial"
+              >
+                <span>Start a Project</span>
+                <FiArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </button>
+              <button
+                onClick={() => scrollTo('work')}
+                className="hero-cta-btn btn-secondary text-sm px-6 py-3 cursor-pointer group flex-1 sm:flex-initial"
+              >
+                <span>Explore My Work</span>
+                <FiArrowDown size={14} className="text-text-secondary group-hover:text-[#171717] group-hover:translate-y-0.5 transition-transform" />
+              </button>
+            </div>
+
+            {/* Social Links Row */}
+            <div ref={socialsRef} className="flex items-center gap-3 mt-7 sm:mt-8">
+              <span className="text-xs uppercase font-medium tracking-wider text-text-muted mr-1 hidden sm:inline-block">
+                Connect:
+              </span>
+              {socialLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.url}
+                    target={item.url.startsWith('mailto:') ? undefined : '_blank'}
+                    rel={item.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                    aria-label={item.label}
+                    title={item.name}
+                    className="hero-social-link w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center text-text-secondary hover:text-[#171717] hover:border-[#171717] hover:bg-white transition-all shadow-2xs hover:-translate-y-0.5"
+                  >
+                    <Icon size={17} />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Subtle Availability Status Badge */}
+            <div
+              ref={availabilityRef}
+              className="flex items-center gap-2.5 mt-5 sm:mt-6 text-xs text-text-secondary font-normal sm:font-medium"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>Available for select freelance projects</span>
+            </div>
+
+          </div>
+
+          {/* Right Column — Professional Portrait */}
+          <div
+            ref={portraitRef}
+            className="lg:col-span-5 w-full flex items-center justify-center lg:justify-end order-2 mt-4 lg:mt-0"
           >
-            <span>Start a Project</span>
-            <FiArrowUpRight size={14} />
-          </button>
-          <button
-            onClick={() => scrollTo('work')}
-            className="hero-cta-btn btn-secondary text-sm px-6 py-3 cursor-pointer"
-          >
-            <span>Explore My Work</span>
-            <FiArrowDown size={14} className="text-text-secondary" />
-          </button>
-        </div>
+            <div className="relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-[400px] lg:max-w-[440px] xl:max-w-[460px] aspect-[4/5] rounded-3xl bg-[#f7f7f7] border border-border overflow-hidden shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06)] group">
+              {/* Soft ambient light gradient behind subject */}
+              <div
+                className="absolute inset-0 bg-gradient-to-b from-[#fafafa] via-[#f7f7f7] to-[#eeeeee] pointer-events-none"
+                aria-hidden="true"
+              />
+              
+              {/* Actual professional portrait */}
+              <Image
+                src="/images/profile.jpeg"
+                alt="Hamenath - Web Developer, UI Enthusiast & AI Builder"
+                fill
+                priority
+                sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 460px"
+                className="object-cover object-top filter contrast-[1.02] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              />
+            </div>
+          </div>
 
-        {/* Small Availability Line with Live Pulse Indicator */}
-        <div
-          ref={availabilityRef}
-          className="flex items-center justify-center gap-2 mt-5 sm:mt-6 text-xs text-text-secondary font-normal sm:font-medium"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span>Available for select freelance projects</span>
         </div>
-
       </div>
     </section>
   );
