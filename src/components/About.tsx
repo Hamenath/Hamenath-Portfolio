@@ -14,7 +14,7 @@ if (typeof window !== 'undefined') {
 const backgroundPoints = [
   'Based in Madurai, Tamil Nadu — collaborating with local clients and remote teams worldwide.',
   'Smart India Hackathon 2025 National Winner — awarded 1st place nationally for building high-impact software.',
-  'Founder of Studio GENZ — designing and delivering bespoke websites and custom AI workflows.',
+  'Working Partner & Digital Marketing at Makera Labs — driving digital growth, marketing strategy, and modern web solutions.',
   'Professional background in full-stack web development (React, Next.js, Node.js) and Meta Front-End Certification.',
 ];
 
@@ -106,6 +106,36 @@ export default function About() {
                   <span className="leading-snug">{point}</span>
                 </div>
               ))}
+
+              {/* Makera Labs Active Partnership Card */}
+              <div className="mt-2 p-3.5 sm:p-4 rounded-xl bg-white border border-border flex items-center justify-between gap-4 shadow-2xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-lg bg-surface border border-border flex items-center justify-center p-1.5 shrink-0">
+                    <Image
+                      src="/images/makeralabs-logo.png"
+                      alt="Makera Labs Logo"
+                      width={44}
+                      height={44}
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-semibold tracking-wider text-text-muted block">
+                      Active Role &amp; Partnership
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-semibold text-[#171717] leading-tight">
+                      Working Partner · Digital Marketing
+                    </h4>
+                    <span className="text-xs text-text-secondary mt-0.5 inline-block">
+                      Makera Labs
+                    </span>
+                  </div>
+                </div>
+                <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-1 rounded-full font-medium shrink-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Active
+                </span>
+              </div>
             </div>
           </div>
 

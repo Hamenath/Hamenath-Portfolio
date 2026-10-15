@@ -6,7 +6,7 @@ import StaggeredMenu, { StaggeredMenuItem, StaggeredMenuSocialItem } from './Sta
 const socialItems: StaggeredMenuSocialItem[] = [
   { label: 'GitHub', link: 'https://github.com/Hamenath' },
   { label: 'LinkedIn', link: 'https://www.linkedin.com/in/hamenathbdesigner' },
-  { label: 'WhatsApp', link: 'https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project.' },
+  { label: 'WhatsApp', link: 'https://wa.me/918778707086?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project.' },
   { label: 'X / Twitter', link: 'https://x.com/HamenathOffi' },
 ];
 
@@ -67,7 +67,7 @@ export default function Navbar() {
             Start a Project
           </a>
           <a
-            href="https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
+            href="https://wa.me/918778707086?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
             target="_blank"
             rel="noopener noreferrer"
             className="btn-whatsapp w-full text-center text-sm py-3"

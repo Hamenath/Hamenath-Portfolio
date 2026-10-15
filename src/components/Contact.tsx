@@ -83,7 +83,7 @@ export default function Contact() {
 - Budget: ${formData.budget}
 - Description: ${formData.description}`;
 
-    const waUrl = `https://wa.me/919361661708?text=${encodeURIComponent(textMsg)}`;
+    const waUrl = `https://wa.me/918778707086?text=${encodeURIComponent(textMsg)}`;
     
     setTimeout(() => {
       setSubmitting(false);
@@ -126,7 +126,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="https://wa.me/919361661708?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
+                  href="https://wa.me/918778707086?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-whatsapp py-3 px-5 text-xs w-full justify-between group"

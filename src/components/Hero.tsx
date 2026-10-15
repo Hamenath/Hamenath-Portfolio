@@ -226,8 +226,8 @@ export default function Hero() {
               <Image
                 src="/images/profile.jpeg"
                 alt="Hamenath - Web Developer & AI Builder"
-                width={1500}
-                height={1500}
+                width={875}
+                height={1024}
                 priority
                 sizes="(max-width: 640px) 320px, (max-width: 1024px) 440px, 520px"
                 className="w-full h-auto object-contain select-none pointer-events-none filter contrast-[1.02]"
