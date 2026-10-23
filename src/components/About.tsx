@@ -125,10 +125,10 @@ export default function About() {
               {/* Portrait Image Container */}
               <div className="relative rounded-4xl rounded-tr-[4rem] rounded-bl-[4rem] overflow-hidden bg-white border-2 border-foreground shadow-[8px_8px_0px_#1E293B]">
                 <Image
-                  src="/images/profile.jpeg"
+                  src="/images/hamenath-portrait.jpg"
                   alt="Hamenath B"
-                  width={1024}
-                  height={1024}
+                  width={944}
+                  height={944}
                   className="w-full h-auto object-cover object-center filter contrast-[1.02] hover:scale-105 transition-transform duration-500 select-none"
                   sizes="(max-width: 1024px) 100vw, 380px"
                 />

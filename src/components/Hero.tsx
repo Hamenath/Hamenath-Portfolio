@@ -216,7 +216,7 @@ export default function Hero() {
             </div>
 
             {/* Professional Role Tags (Confetti sticker pills) */}
-            <div ref={descriptorRef} className="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 sm:mt-6">
+            <div ref={descriptorRef} className="flex flex-wrap items-center gap-3 sm:gap-4 mt-6 sm:mt-7 mb-10 sm:mb-12 md:mb-14">
               <span className="hero-role-tag inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground font-heading font-bold text-xs sm:text-sm border-2 border-foreground shadow-[3px_3px_0px_#1E293B] hover:-translate-y-0.5 hover:rotate-1 transition-all">
                 ✦ Web Developer
               </span>
@@ -231,7 +231,7 @@ export default function Hero() {
             {/* Short Description */}
             <p
               ref={descriptionRef}
-              className="text-foreground/80 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mt-8 sm:mt-9 md:mt-10 font-medium"
+              className="text-foreground/80 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mt-6 sm:mt-8 font-medium"
             >
               I build thoughtful websites and useful digital experiences for businesses, startups, and personal brands.
             </p>
@@ -327,10 +327,10 @@ export default function Hero() {
               {/* Blob Masked Portrait Card */}
               <div className="relative rounded-[2.5rem] rounded-tr-[5rem] rounded-bl-[5rem] border-2 border-foreground bg-white overflow-hidden shadow-[8px_8px_0px_#1E293B] transition-transform duration-300 hover:scale-[1.01]">
                 <Image
-                  src="/images/profile.jpeg"
+                  src="/images/hamenath-portrait.jpg"
                   alt="Hamenath - Web Developer & AI Builder"
-                  width={1024}
-                  height={1024}
+                  width={944}
+                  height={944}
                   priority
                   sizes="(max-width: 640px) 320px, (max-width: 1024px) 420px, 460px"
                   className="w-full h-auto object-cover object-center scale-115 sm:scale-120 origin-[50%_35%] select-none pointer-events-none filter contrast-[1.03]"
