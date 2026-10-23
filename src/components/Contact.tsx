@@ -31,13 +31,6 @@ const projectTypes = [
   'Other / Custom',
 ];
 
-const budgetOptions = [
-  '₹25,000 - ₹50,000',
-  '₹50,000 - ₹1,00,000',
-  '₹1,00,000+',
-  'Let\'s discuss',
-];
-
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -46,7 +39,7 @@ export default function Contact() {
     phone: '',
     projectType: 'Business Website',
     website: '',
-    budget: '₹25,000 - ₹50,000',
+    budget: '',
     description: '',
   });
 
@@ -135,7 +128,7 @@ export default function Contact() {
 - Phone: ${formData.phone || 'N/A'}
 - Project Type: ${formData.projectType}
 - Existing Site: ${formData.website || 'None'}
-- Budget: ${formData.budget}
+- Budget: ${formData.budget || 'Flexible / To be discussed'}
 - Description: ${formData.description}`;
 
     const waUrl = `https://wa.me/918778707086?text=${encodeURIComponent(textMsg)}`;
@@ -418,27 +411,20 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {/* Budget */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs uppercase font-heading font-extrabold tracking-wider text-foreground">
+                  {/* Budget Input Box */}
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="budget" className="text-xs uppercase font-heading font-extrabold tracking-wider text-foreground">
                       Estimated Budget
                     </label>
-                    <div className="flex flex-wrap gap-2">
-                      {budgetOptions.map((b) => (
-                        <button
-                          key={b}
-                          type="button"
-                          onClick={() => setFormData((prev) => ({ ...prev, budget: b }))}
-                          className={`px-3.5 py-1.5 rounded-full border-2 border-foreground text-xs font-heading font-bold transition-all cursor-pointer ${
-                            formData.budget === b
-                              ? 'bg-tertiary text-foreground shadow-[3px_3px_0px_#1E293B] -translate-y-0.5'
-                              : 'bg-white text-foreground hover:bg-secondary/30 hover:shadow-[2px_2px_0px_#1E293B]'
-                          }`}
-                        >
-                          {b}
-                        </button>
-                      ))}
-                    </div>
+                    <input
+                      type="text"
+                      id="budget"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      placeholder="e.g. $1,500, Flexible, or enter your budget"
+                      className="w-full px-4 py-3 rounded-xl bg-white border-2 border-foreground text-foreground text-sm placeholder:text-muted-foreground focus:border-accent focus:shadow-[4px_4px_0px_#8B5CF6] focus:outline-none transition-all"
+                    />
                   </div>
 
                   {/* Description */}
