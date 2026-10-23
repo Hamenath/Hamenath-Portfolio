@@ -127,8 +127,8 @@ export default function About() {
                 <Image
                   src="/images/profile.jpeg"
                   alt="Hamenath B"
-                  width={600}
-                  height={750}
+                  width={1024}
+                  height={1024}
                   className="w-full h-auto object-cover object-center filter contrast-[1.02] hover:scale-105 transition-transform duration-500 select-none"
                   sizes="(max-width: 1024px) 100vw, 380px"
                 />

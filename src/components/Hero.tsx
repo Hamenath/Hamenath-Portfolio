@@ -329,11 +329,11 @@ export default function Hero() {
                 <Image
                   src="/images/profile.jpeg"
                   alt="Hamenath - Web Developer & AI Builder"
-                  width={875}
+                  width={1024}
                   height={1024}
                   priority
                   sizes="(max-width: 640px) 320px, (max-width: 1024px) 420px, 460px"
-                  className="w-full h-auto object-cover select-none pointer-events-none filter contrast-[1.03]"
+                  className="w-full h-auto object-cover object-center select-none pointer-events-none filter contrast-[1.03]"
                 />
               </div>
 
