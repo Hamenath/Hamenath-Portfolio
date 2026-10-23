@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="bg-white text-[#171717] min-h-screen">
+    <main className="bg-background text-foreground min-h-screen selection:bg-tertiary selection:text-foreground">
       {/* Section B — Hero */}
       <Hero />
 

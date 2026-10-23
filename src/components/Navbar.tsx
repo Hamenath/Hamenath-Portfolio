@@ -33,26 +33,27 @@ export default function Navbar() {
       socialItems={socialItems}
       displaySocials={true}
       displayItemNumbering={true}
-      colors={['#171717', '#262626', '#f0f0f0']}
-      menuButtonColor="#171717"
-      openMenuButtonColor="#171717"
-      accentColor="#171717"
+      colors={['#8B5CF6', '#F472B6', '#FFFDF5']}
+      menuButtonColor="#1E293B"
+      openMenuButtonColor="#1E293B"
+      accentColor="#8B5CF6"
       logoNode={
         <a
           href="#home"
           onClick={(e) => scrollTo(e, '#home')}
-          className="text-lg font-semibold tracking-tight text-[#171717] font-heading hover:opacity-80 transition-opacity"
+          className="text-xl font-extrabold tracking-tight text-foreground font-heading hover:text-accent transition-colors flex items-center gap-1.5 group select-none"
           aria-label="Hamenath - Back to top"
         >
-          Hamenath
+          <span>Hamenath</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-secondary border-2 border-foreground inline-block group-hover:scale-125 transition-transform" />
         </a>
       }
       extraContent={
-        <div className="flex flex-col gap-3 pt-2">
+        <div className="flex flex-col gap-3 pt-3">
           <a
             href="#contact"
             onClick={(e) => scrollTo(e, '#contact')}
-            className="btn-primary w-full text-center text-sm py-3 justify-center shadow-xs hover:shadow-md"
+            className="btn-candy w-full text-center text-sm py-3 justify-center shadow-[3px_3px_0px_#1E293B]"
           >
             Start a Project
           </a>
@@ -60,7 +61,7 @@ export default function Navbar() {
             href="https://wa.me/918778707086?text=Hi%20Hamenath,%20I%20would%20like%20to%20discuss%20a%20website%20project."
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-whatsapp w-full text-center text-sm py-3 justify-center shadow-xs hover:shadow-md"
+            className="btn-whatsapp w-full text-center text-sm py-3 justify-center shadow-[3px_3px_0px_#1E293B]"
           >
             Chat on WhatsApp
           </a>
