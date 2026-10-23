@@ -30,10 +30,10 @@ export default function ScrollToTop() {
           exit={{ opacity: 0, scale: 0.85, y: 10 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-white/95 backdrop-blur-md border border-border text-[#171717] hover:bg-surface hover:border-[#171717] hover:shadow-lg flex items-center justify-center shadow-md transition-all cursor-pointer hover:-translate-y-0.5 active:translate-y-0"
+          className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-white border-2 border-foreground text-foreground shadow-[3px_3px_0px_#1E293B] hover:bg-tertiary hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#1E293B] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#1E293B] flex items-center justify-center transition-all cursor-pointer"
           aria-label="Back to top"
         >
-          <FiArrowUp size={17} />
+          <FiArrowUp size={18} className="stroke-[2.5]" />
         </motion.button>
       )}
     </AnimatePresence>

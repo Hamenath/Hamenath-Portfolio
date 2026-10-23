@@ -310,7 +310,7 @@ export default function Hero() {
             ref={portraitRef}
             className="lg:col-span-5 w-full flex items-center justify-center lg:justify-end order-2 mt-8 lg:mt-0"
           >
-            <div className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[450px]">
+            <div className="relative w-full max-w-80 sm:max-w-95 md:max-w-105 lg:max-w-112.5">
               
               {/* Memphis Dot Grid Backdrop */}
               <div
