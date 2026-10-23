@@ -216,14 +216,14 @@ export default function Hero() {
             </div>
 
             {/* Professional Role Tags (Confetti sticker pills) */}
-            <div ref={descriptorRef} className="flex flex-wrap items-center gap-2.5 sm:gap-3 mt-4 sm:mt-5">
-              <span className="hero-role-tag inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-accent text-accent-foreground font-heading font-bold text-xs sm:text-sm border-2 border-foreground shadow-[3px_3px_0px_#1E293B] hover:-translate-y-0.5 hover:rotate-1 transition-all">
+            <div ref={descriptorRef} className="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 sm:mt-6">
+              <span className="hero-role-tag inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground font-heading font-bold text-xs sm:text-sm border-2 border-foreground shadow-[3px_3px_0px_#1E293B] hover:-translate-y-0.5 hover:rotate-1 transition-all">
                 ✦ Web Developer
               </span>
-              <span className="hero-role-tag inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-tertiary text-foreground font-heading font-bold text-xs sm:text-sm border-2 border-foreground shadow-[3px_3px_0px_#1E293B] hover:-translate-y-0.5 hover:-rotate-1 transition-all">
+              <span className="hero-role-tag inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tertiary text-foreground font-heading font-bold text-xs sm:text-sm border-2 border-foreground shadow-[3px_3px_0px_#1E293B] hover:-translate-y-0.5 hover:-rotate-1 transition-all">
                 ★ AI Builder
               </span>
-              <span className="hero-role-tag inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-secondary text-foreground font-heading font-bold text-xs sm:text-sm border-2 border-foreground shadow-[3px_3px_0px_#1E293B] hover:-translate-y-0.5 hover:rotate-1 transition-all">
+              <span className="hero-role-tag inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-foreground font-heading font-bold text-xs sm:text-sm border-2 border-foreground shadow-[3px_3px_0px_#1E293B] hover:-translate-y-0.5 hover:-rotate-1 transition-all">
                 ● Creative Engineer
               </span>
             </div>
@@ -231,7 +231,7 @@ export default function Hero() {
             {/* Short Description */}
             <p
               ref={descriptionRef}
-              className="text-foreground/80 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mt-5 sm:mt-6 font-medium"
+              className="text-foreground/80 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mt-8 sm:mt-9 md:mt-10 font-medium"
             >
               I build thoughtful websites and useful digital experiences for businesses, startups, and personal brands.
             </p>
@@ -333,7 +333,7 @@ export default function Hero() {
                   height={1024}
                   priority
                   sizes="(max-width: 640px) 320px, (max-width: 1024px) 420px, 460px"
-                  className="w-full h-auto object-cover object-center select-none pointer-events-none filter contrast-[1.03]"
+                  className="w-full h-auto object-cover object-center scale-115 sm:scale-120 origin-[50%_35%] select-none pointer-events-none filter contrast-[1.03]"
                 />
               </div>
 
